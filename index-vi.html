@@ -1,0 +1,3064 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cẩm Nang Hướng Dẫn Sử Dụng Hệ Thống ERP / MRP - SINGLE 2 V25.02</title>
+
+  <!-- CHẶN HOÀN TOÀN CÔNG CỤ TÌM KIẾM VÀ BOT AI THU THẬP DỮ LIỆU -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="referrer" content="no-referrer">
+
+  <!-- KHỞI TẠO THEME SỚM ĐỂ TRÁNH FOUC (MẶC ĐỊNH LÀ LIGHT) -->
+  <script>
+    (function() {
+      try {
+        const saved = localStorage.getItem('mrp_manual_theme');
+        if (saved === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <style>
+    /* THEME VARIABLES: LIGHT THEME IS DEFAULT */
+    :root, [data-theme="light"] {
+      --bg-dark: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #f1f5f9;
+      --bg-card-hover: #e2e8f0;
+      --border-color: #cbd5e1;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #64748b;
+      --navbar-bg: rgba(255, 255, 255, 0.95);
+      --navbar-border: #e2e8f0;
+      --nav-input-bg: #f8fafc;
+      --nav-input-border: #cbd5e1;
+      --nav-input-color: #0f172a;
+      --hero-bg: linear-gradient(180deg, #e2e8f0 0%, #f8fafc 100%);
+      --hero-title-gradient: linear-gradient(90deg, #0284c7, #2563eb, #7c3aed);
+      --table-th-bg: #f1f5f9;
+      --table-th-color: #0369a1;
+      --table-td-border: #e2e8f0;
+      --table-td-color: #1e293b;
+      --table-hover: rgba(226, 232, 240, 0.6);
+      --step-bg: #f8fafc;
+      --step-border: #0284c7;
+      --lineage-bg: #f0f9ff;
+      --lineage-border: #bae6fd;
+      --faq-header-bg: #f8fafc;
+      --faq-body-bg: #ffffff;
+      --chat-win-bg: #ffffff;
+      --chat-header-bg: #0284c7;
+      --chat-tabs-bg: #f1f5f9;
+      --chat-bot-msg-bg: #f1f5f9;
+      --chat-bot-msg-color: #0f172a;
+      --chat-bot-msg-border: #e2e8f0;
+      --chat-chip-bg: #ffffff;
+      --chat-chip-border: #cbd5e1;
+      --chat-chip-color: #0284c7;
+      --chat-input-area-bg: #ffffff;
+      --chat-input-bg: #f8fafc;
+      --chat-input-border: #cbd5e1;
+      --chat-input-color: #0f172a;
+      --footer-bg: #f1f5f9;
+      --footer-border: #e2e8f0;
+      --footer-text: #64748b;
+      --accent: #0284c7;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.12);
+      --radius: 8px;
+
+      /* Bootstrap Action Colors (Consistent across themes) */
+      --btn-success: #28a745;
+      --btn-success-hover: #218838;
+      --btn-primary: #007bff;
+      --btn-primary-hover: #0069d9;
+      --btn-info: #17a2b8;
+      --btn-info-hover: #138496;
+      --btn-warning: #ffc107;
+      --btn-warning-hover: #e0a800;
+      --btn-danger: #dc3545;
+      --btn-danger-hover: #c82333;
+      --btn-dark: #343a40;
+      --btn-secondary: #6c757d;
+    }
+
+    /* DARK THEME */
+    [data-theme="dark"] {
+      --bg-dark: #0f172a;
+      --bg-surface: #1e293b;
+      --bg-card: #1a2234;
+      --bg-card-hover: #222e44;
+      --border-color: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --navbar-bg: rgba(15, 23, 42, 0.95);
+      --navbar-border: #334155;
+      --nav-input-bg: #1e293b;
+      --nav-input-border: #334155;
+      --nav-input-color: #ffffff;
+      --hero-bg: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+      --hero-title-gradient: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc);
+      --table-th-bg: #111827;
+      --table-th-color: #38bdf8;
+      --table-td-border: rgba(51, 65, 85, 0.6);
+      --table-td-color: #cbd5e1;
+      --table-hover: rgba(51, 65, 85, 0.3);
+      --step-bg: rgba(15, 23, 42, 0.6);
+      --step-border: #0284c7;
+      --lineage-bg: #0b1329;
+      --lineage-border: #1e3a8a;
+      --faq-header-bg: #1e293b;
+      --faq-body-bg: #131c2e;
+      --chat-win-bg: #111827;
+      --chat-header-bg: #1e293b;
+      --chat-tabs-bg: #0f172a;
+      --chat-bot-msg-bg: #1f2937;
+      --chat-bot-msg-color: #e5e7eb;
+      --chat-bot-msg-border: #374151;
+      --chat-chip-bg: #111827;
+      --chat-chip-border: #374151;
+      --chat-chip-color: #38bdf8;
+      --chat-input-area-bg: #1e293b;
+      --chat-input-bg: #0f172a;
+      --chat-input-border: #334155;
+      --chat-input-color: #ffffff;
+      --footer-bg: #090d16;
+      --footer-border: #334155;
+      --footer-text: #64748b;
+      --accent: #38bdf8;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4);
+      --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .module-section, .submodule-card, .pipeline-card {
+      scroll-margin-top: 5rem;
+    }
+
+    /* TOP NAVBAR */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navbar-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--navbar-border);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .brand-logo {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.05rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      letter-spacing: 1px;
+    }
+    .brand-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--text-main);
+    }
+    .brand-badge {
+      font-size: 0.75rem;
+      background: #0284c7;
+      color: #ffffff;
+      padding: 0.2rem 0.55rem;
+      border-radius: 9999px;
+      font-weight: 600;
+    }
+
+    .nav-search {
+      flex: 1;
+      max-width: 460px;
+      position: relative;
+    }
+    .nav-search input {
+      width: 100%;
+      background: var(--nav-input-bg);
+      border: 1px solid var(--nav-input-border);
+      color: var(--nav-input-color);
+      padding: 0.5rem 1rem 0.5rem 2.5rem;
+      border-radius: 9999px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .nav-search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+    }
+    .nav-search-icon {
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      pointer-events: none;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .btn-theme-toggle {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-theme-toggle:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .btn-portal {
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-decoration: none;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-portal:hover { background: #0369a1; }
+
+    /* HERO BANNER */
+    .hero {
+      background: var(--hero-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 2.25rem 1.5rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.05rem;
+      font-weight: 800;
+      margin-bottom: 0.6rem;
+      background: var(--hero-title-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      color: var(--text-muted);
+      max-width: 880px;
+      margin: 0 auto 0.5rem auto;
+      font-size: 1rem;
+    }
+
+    /* ROLE FILTER PILLS */
+    .role-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.4rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .role-pill:hover, .role-pill.active {
+      background: #0284c7;
+      color: #ffffff !important;
+      border-color: #38bdf8;
+    }
+
+    /* SIDEBAR ROLE FILTER PANEL */
+    .sidebar-role-panel {
+      margin-bottom: 0.85rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.75rem;
+    }
+    .sidebar-role-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .sidebar-role-header .sidebar-title { margin-bottom: 0; }
+    .btn-clear-role {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-clear-role:hover {
+      background: var(--accent);
+      color: #ffffff;
+    }
+    .sidebar-role-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+    .sidebar-role-pills .role-pill {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.55rem;
+      border-radius: 6px;
+    }
+    .sidebar-filter-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--lineage-bg);
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      padding: 0.35rem 0.65rem;
+      margin-top: 0.6rem;
+      font-size: 0.76rem;
+      color: var(--text-main);
+      animation: fadeIn 0.2s ease;
+    }
+    .btn-reset-filter {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.85rem;
+      padding: 0 0.25rem;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .btn-reset-filter:hover { color: #fff; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* LAYOUT CONTAINER */
+    .main-container {
+      display: flex;
+      flex: 1;
+      max-width: 1560px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem;
+      gap: 2rem;
+    }
+
+    /* SIDEBAR TOC */
+    .sidebar {
+      width: 295px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 4.5rem;
+      height: calc(100vh - 5.5rem);
+      overflow-y: auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+    }
+    .sidebar::-webkit-scrollbar { width: 5px; }
+    .sidebar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    .sidebar-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .sidebar-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .sidebar-nav li a {
+      display: block;
+      padding: 0.45rem 0.65rem;
+      border-radius: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.86rem;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+    .sidebar-nav li a:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-main);
+    }
+    .sidebar-nav li a.active {
+      background: var(--lineage-bg);
+      color: var(--accent);
+      font-weight: 700;
+      border-left: 3px solid var(--accent);
+      padding-left: 0.75rem;
+    }
+    .sidebar-nav li a.role-matched {
+      border-left: 3px solid #0284c7;
+      background: var(--lineage-bg);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .sidebar-nav li a.role-matched::before {
+      content: "● ";
+      color: var(--accent);
+      font-size: 0.7rem;
+      margin-right: 0.35rem;
+    }
+    .sidebar-divider {
+      height: 1px;
+      background: var(--border-color);
+      margin: 0.75rem 0;
+    }
+
+    /* MAIN CONTENT */
+    .content {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* GLOBAL INLINE CODE FORMATTING */
+    code {
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      font-size: 0.88em;
+      padding: 0.12rem 0.38rem;
+      border-radius: 4px;
+      background: rgba(2, 132, 199, 0.08);
+      color: #0284c7;
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+    [data-theme="dark"] code {
+      background: rgba(56, 189, 248, 0.12);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    /* PIPELINE INTERACTIVE DIAGRAM */
+    .pipeline-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-md);
+    }
+    .pipeline-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent);
+    }
+    .pipeline-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .pipe-step {
+      background: #1a2234;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      position: relative;
+      transition: transform 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+    .pipe-step:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      background: #202b42;
+    }
+    .pipe-num {
+      width: 26px;
+      height: 26px;
+      background: #0284c7;
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin: 0 auto 0.5rem auto;
+    }
+    .pipe-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #ffffff !important;
+      margin-bottom: 0.25rem;
+    }
+    .pipe-sub {
+      font-size: 0.75rem;
+      color: #cbd5e1 !important;
+    }
+
+    /* SCREENSHOT PREVIEW BOX (FULL SIZE + CLICK TO ZOOM LIGHTBOX) */
+    .screen-preview {
+      margin: 1.25rem 0 1.5rem 0;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #0f172a;
+      box-shadow: var(--shadow-md);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .screen-preview:hover {
+      border-color: var(--accent);
+      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.2);
+    }
+    .screen-preview-caption {
+      padding: 0.6rem 1rem;
+      font-size: 0.84rem;
+      color: #e2e8f0;
+      background: #1e293b;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .btn-zoom-hint {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+      padding: 0.2rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .btn-zoom-hint:hover {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+    }
+    .screen-preview img {
+      width: 100%;
+      height: auto;
+      max-height: none;
+      object-fit: contain;
+      display: block;
+      background: #090d16;
+      cursor: zoom-in;
+    }
+
+    /* FULL-SCREEN IMAGE LIGHTBOX MODAL */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 10, 20, 0.94);
+      backdrop-filter: blur(6px);
+      z-index: 9999;
+      display: none;
+      flex-direction: column;
+      user-select: none;
+    }
+    .lightbox-overlay.open {
+      display: flex;
+    }
+    .lightbox-toolbar {
+      background: #0f172a;
+      border-bottom: 1px solid #334155;
+      padding: 0.65rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      color: #f8fafc;
+      z-index: 2;
+    }
+    .lightbox-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #38bdf8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .lightbox-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+    .lightbox-btn {
+      background: #1e293b;
+      border: 1px solid #475569;
+      color: #f8fafc;
+      padding: 0.38rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.15s;
+    }
+    .lightbox-btn:hover {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    .lightbox-btn.close-btn {
+      background: #dc2626;
+      border-color: #ef4444;
+    }
+    .lightbox-btn.close-btn:hover {
+      background: #b91c1c;
+    }
+    .lightbox-zoom-level {
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      min-width: 54px;
+      text-align: center;
+    }
+    .lightbox-viewport {
+      flex: 1;
+      overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      cursor: grab;
+    }
+    .lightbox-viewport.dragging {
+      cursor: grabbing;
+    }
+    .lightbox-img {
+      max-width: 96vw;
+      max-height: 86vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      transition: transform 0.12s ease-out;
+      transform-origin: center center;
+      border-radius: 6px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+      border: 1px solid #334155;
+    }
+
+    /* SCENARIO BOXES & POST-ACTION BOXES */
+    .scenario-box {
+      background: #1a2234;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      color: #ffffff;
+    }
+    .scenario-box b, .scenario-box strong { color: #ffffff; }
+    .scenario-box .scenario-title {
+      color: #38bdf8 !important;
+      font-size: 0.95rem;
+      display: block;
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+    }
+    .scenario-box .step-item {
+      background: rgba(15, 23, 42, 0.75) !important;
+      border-left: 3px solid #0284c7 !important;
+      color: #ffffff !important;
+    }
+    .scenario-box .step-num { color: #38bdf8 !important; }
+    .scenario-box .step-text { color: #f8fafc !important; }
+    .scenario-box .step-text b { color: #ffffff !important; }
+    .scenario-box code {
+      color: #7dd3fc !important;
+      background: rgba(56, 189, 248, 0.15) !important;
+      border: 1px solid rgba(56, 189, 248, 0.3) !important;
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+    }
+
+    /* POST-ACTION VERIFICATION BOXES */
+    .post-action-box {
+      background: #112a1d;
+      border: 1px solid rgba(40, 167, 69, 0.5);
+      border-radius: 6px;
+      padding: 1rem;
+      margin-top: 1rem;
+      color: #f8fafc;
+    }
+    .post-action-box.blue {
+      background: #0f2438;
+      border-color: rgba(2, 132, 199, 0.5);
+    }
+    .post-action-box .action-title-green {
+      color: #4ade80 !important;
+      font-size: 0.92rem;
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    .post-action-box .action-title-blue {
+      color: #38bdf8 !important;
+      font-size: 0.92rem;
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    .post-action-box b, .post-action-box strong { color: #ffffff !important; }
+    .post-action-box ol, .post-action-box ul, .post-action-box li {
+      color: #f1f5f9 !important;
+      line-height: 1.6;
+    }
+    .post-action-box code {
+      color: #7dd3fc !important;
+      background: rgba(56, 189, 248, 0.15) !important;
+      border: 1px solid rgba(56, 189, 248, 0.3) !important;
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+    }
+
+    /* MODULE SECTION STYLES */
+    .module-section {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .module-header {
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+    .module-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .module-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: #0284c7;
+      color: #fff;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+    .module-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .breadcrumb-trail {
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+    }
+    .breadcrumb-label {
+      color: var(--text-muted);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* SUBMODULE CARDS */
+    .submodule-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .submodule-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .submodule-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* BUTTON BADGES */
+    .btn-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      font-family: monospace;
+      color: #fff;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+    .btn-success { background-color: var(--btn-success); }
+    .btn-primary { background-color: var(--btn-primary); }
+    .btn-info { background-color: var(--btn-info); color: #fff; }
+    .btn-warning { background-color: var(--btn-warning); color: #111; }
+    .btn-danger { background-color: var(--btn-danger); }
+    .btn-dark { background-color: var(--btn-dark); border: 1px solid #495057; }
+    .btn-secondary { background-color: var(--btn-secondary); }
+
+    /* TABLES STYLING */
+    .table-responsive {
+      overflow-x: auto;
+      margin: 1rem 0;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+    .data-table th {
+      background: var(--table-th-bg);
+      color: var(--table-th-color);
+      padding: 0.65rem 0.85rem;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+    .data-table td {
+      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid var(--table-td-border);
+      color: var(--table-td-color);
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: var(--table-hover); }
+
+    /* WORKFLOW STEPS LIST */
+    .steps-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .step-item {
+      display: flex;
+      gap: 0.85rem;
+      background: var(--step-bg);
+      padding: 0.85rem 1rem;
+      border-radius: 6px;
+      border-left: 3px solid var(--step-border);
+    }
+    .step-num {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.95rem;
+      min-width: 65px;
+    }
+    .step-text {
+      flex: 1;
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+
+    /* DATA LINEAGE FLOW CARDS */
+    .lineage-card {
+      background: var(--lineage-bg);
+      border: 1px solid var(--lineage-border);
+      border-radius: 6px;
+      padding: 0.85rem 1.15rem;
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+    }
+    .lineage-box {
+      background: var(--bg-surface);
+      padding: 0.6rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+    .lineage-box b { color: var(--accent); display: block; margin-bottom: 0.2rem; font-size: 0.75rem; text-transform: uppercase; }
+    .lineage-arrow { color: #64748b; font-weight: bold; font-size: 1.2rem; text-align: center; }
+
+    /* ALERTS / WARNINGS */
+    .alert-box {
+      border-radius: 6px;
+      padding: 0.85rem 1.15rem;
+      margin: 1rem 0;
+      font-size: 0.88rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+    .alert-warning {
+      background: rgba(245, 124, 0, 0.12);
+      border: 1px solid rgba(245, 124, 0, 0.35);
+      color: #d97706;
+    }
+    .alert-danger {
+      background: rgba(211, 47, 47, 0.12);
+      border: 1px solid rgba(211, 47, 47, 0.35);
+      color: #dc2626;
+    }
+    .alert-info {
+      background: rgba(2, 132, 199, 0.12);
+      border: 1px solid rgba(2, 132, 199, 0.35);
+      color: #0284c7;
+    }
+
+    /* ACCORDION FAQ */
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      margin-bottom: 0.65rem;
+      overflow: hidden;
+    }
+    .faq-q {
+      padding: 0.85rem 1.15rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--faq-header-bg);
+      transition: background 0.2s;
+    }
+    .faq-q:hover { background: var(--bg-card-hover); }
+    .faq-a {
+      padding: 1rem 1.15rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-color);
+      display: none;
+      background: var(--faq-body-bg);
+      line-height: 1.6;
+    }
+    .faq-item.active .faq-a { display: block; }
+    .faq-icon { transition: transform 0.2s; }
+    .faq-item.active .faq-icon { transform: rotate(180deg); }
+
+    /* FOOTER */
+    footer {
+      background: var(--footer-bg);
+      border-top: 1px solid var(--footer-border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--footer-text);
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+
+    /* FLOATING BACK TO TOP BUTTON */
+    .btn-back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 6.5rem;
+      background: #1e293b;
+      border: 1px solid var(--accent);
+      color: #fff;
+      padding: 0.65rem 1.1rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: all 0.25s ease;
+      z-index: 998;
+    }
+    .btn-back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .btn-back-to-top:hover {
+      background: var(--accent);
+      color: #0f172a;
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.45);
+      transform: translateY(-2px);
+    }
+
+    /* FLOATING CHATBOT WIDGET */
+    .chatbot-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 58px;
+      height: 58px;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      z-index: 999;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .chatbot-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.7);
+    }
+    .chat-pulse {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.4);
+      animation: pulse 2s infinite;
+      z-index: -1;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    /* CHAT WINDOW */
+    .chat-window {
+      position: fixed;
+      bottom: 5.5rem;
+      right: 2rem;
+      width: 450px;
+      max-width: calc(100vw - 2.5rem);
+      height: 610px;
+      max-height: calc(100vh - 7rem);
+      background: var(--chat-win-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+      overflow: hidden;
+    }
+    .chat-window.open { display: flex; }
+    .chat-header {
+      background: var(--chat-header-bg);
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .chat-header-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .chat-status-dot {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+    }
+    .chat-header-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #fff;
+    }
+    .chat-header-sub {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .chat-close-btn {
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0.2rem;
+    }
+    .chat-close-btn:hover { color: #fff; }
+
+    /* CHAT TABS */
+    .chat-tabs {
+      display: flex;
+      background: var(--chat-tabs-bg);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .chat-tab-btn {
+      flex: 1;
+      padding: 9px 12px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .chat-tab-btn:hover {
+      color: var(--text-main);
+      background: rgba(0, 0, 0, 0.04);
+    }
+    .chat-tab-btn.active {
+      color: var(--accent);
+      background: var(--chat-win-bg);
+      border-bottom: 2px solid var(--accent);
+    }
+    .chat-tab-content {
+      flex: 1;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .chat-tab-content.active { display: flex; }
+
+    .chat-messages {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .chat-messages::-webkit-scrollbar { width: 5px; }
+    .chat-messages::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
+
+    .chat-msg {
+      max-width: 87%;
+      padding: 0.65rem 0.9rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      word-break: break-word;
+    }
+    .chat-msg-bot {
+      background: var(--chat-bot-msg-bg);
+      color: var(--chat-bot-msg-color);
+      align-self: flex-start;
+      border-bottom-left-radius: 2px;
+      border: 1px solid var(--chat-bot-msg-border);
+    }
+    .chat-msg-user {
+      background: #0284c7;
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 2px;
+    }
+    .chat-msg-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.5rem;
+    }
+    .chat-chip {
+      background: var(--chat-chip-bg);
+      border: 1px solid var(--chat-chip-border);
+      color: var(--chat-chip-color);
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .chat-chip:hover {
+      background: #0284c7;
+      border-color: #0284c7;
+      color: #fff;
+    }
+
+    .chat-input-area {
+      padding: 0.75rem;
+      background: var(--chat-input-area-bg);
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      gap: 0.5rem;
+    }
+    .chat-input {
+      flex: 1;
+      background: var(--chat-input-bg);
+      border: 1px solid var(--chat-input-border);
+      color: var(--chat-input-color);
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      outline: none;
+    }
+    .chat-input:focus { border-color: var(--accent); }
+    .chat-send-btn {
+      background: #0284c7;
+      color: #fff;
+      border: none;
+      padding: 0 1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .chat-send-btn:hover { background: #0369a1; }
+
+    /* FEEDBACK TO GOOGLE SHEET TAB STYLES */
+    .sheet-form-container {
+      padding: 16px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: var(--chat-win-bg);
+    }
+    .sheet-notice {
+      background: var(--lineage-bg);
+      border-left: 4px solid var(--accent);
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .form-group-item {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .form-group-item label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .form-group-item textarea,
+    .form-group-item input {
+      padding: 9px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 0.86rem;
+      background: var(--chat-input-bg);
+      color: var(--chat-input-color);
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+    .form-group-item textarea:focus,
+    .form-group-item input:focus { border-color: var(--accent); }
+    .btn-submit-sheet {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      border: none;
+      padding: 11px 16px;
+      border-radius: 7px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.15s, opacity 0.2s;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+      margin-top: 4px;
+    }
+    .btn-submit-sheet:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+    .sheet-status-alert {
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 0.84rem;
+      display: none;
+      line-height: 1.4;
+    }
+    .sheet-status-alert.success {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid #059669;
+    }
+    .sheet-status-alert.error {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid #dc2626;
+    }
+
+    @media (max-width: 992px) {
+      .main-container { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; position: static; }
+      .pipeline-steps { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .navbar { flex-wrap: wrap; }
+      .nav-search { order: 3; max-width: 100%; width: 100%; margin-top: 0.5rem; }
+      .pipeline-steps { grid-template-columns: 1fr; }
+      .lineage-card { grid-template-columns: 1fr; }
+      .lineage-arrow { transform: rotate(90deg); margin: 0.2rem 0; }
+    }
+
+    /* Language Switcher & Navbar Responsive Fix */
+    .navbar { flex-wrap: nowrap; gap: 0.75rem; padding: 0.65rem 1.25rem; }
+    .brand { display: flex; align-items: center; gap: 0.65rem; flex-shrink: 0; white-space: nowrap; }
+    .brand-title, .brand-badge { white-space: nowrap; flex-shrink: 0; }
+    .nav-search { flex: 1 1 220px; min-width: 160px; max-width: 380px; }
+    .nav-actions { display: flex; align-items: center; gap: 0.55rem; flex-shrink: 0; white-space: nowrap; }
+    .btn-theme-toggle, .btn-portal { white-space: nowrap; flex-shrink: 0; }
+    @media (max-width: 1180px) {
+      .navbar { flex-wrap: wrap; }
+      .nav-search { order: 3; max-width: 100%; width: 100%; flex: 1 1 100%; margin-top: 0.35rem; }
+    }
+    @media (max-width: 768px) {
+      .brand-badge, #sysClock { display: none; }
+    }
+    .lang-switcher {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 3px;
+      box-shadow: var(--shadow-sm);
+      flex-shrink: 0;
+    }
+    .lang-pill {
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .lang-pill:hover { color: var(--text-main); background: var(--bg-card-hover); border-color: var(--border-color); }
+    .lang-pill.active { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 1px 3px rgba(2,132,199,0.35); }
+    .chat-lang-pills {
+      display: inline-flex;
+      gap: 3px;
+      margin-right: 0.4rem;
+      background: rgba(255,255,255,0.14);
+      padding: 2px;
+      border-radius: 999px;
+    }
+    .chat-lang-btn {
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .chat-lang-btn.active { background: #fff; color: #0f172a; }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAVBAR -->
+  <header class="navbar">
+    <div class="brand-wrap">
+      <div class="brand-logo">SINGLE 2</div>
+      <div>
+        <div class="brand-title">CẨM NANG HƯỚNG DẪN SỬ DỤNG MRP</div>
+        <div style="font-size: 0.75rem; color: var(--text-dim);">SINGLE 2 ENTERPRISE V 25.02</div>
+      </div>
+      <span class="brand-badge">Tài liệu Hướng dẫn Người dùng</span>
+    </div>
+
+    <div class="nav-search">
+      <span class="nav-search-icon">🔍</span>
+      <input type="text" id="globalSearch" placeholder="Tìm kiếm trang chức năng, bước thao tác, nút bấm, mã lỗi EFM/ECD/ECT... (Ctrl + K)">
+    </div>
+
+    <div class="nav-actions">
+      <div class="lang-switcher" aria-label="Language">
+        <a href="index-vi.html" class="lang-pill active" title="Tiếng Việt">🇻🇳 VI</a>
+        <a href="index.html" class="lang-pill" title="English">🇺🇸 EN</a>
+        <a href="index-ko.html" class="lang-pill" title="한국어">🇰🇷 KO</a>
+      </div>
+      <span style="font-size: 0.8rem; color: var(--text-muted); font-family: monospace;" id="sysClock">00:00:00</span>
+      <button id="themeToggleBtn" class="btn-theme-toggle" aria-label="Chuyển đổi giao diện Sáng / Tối">
+        <span id="themeIcon">🌙</span> <span id="themeText">Giao diện Tối</span>
+      </button>
+      <span class="btn-portal" title="Cổng thông tin hệ thống MRP nội bộ">
+        <span>🔒</span> Cổng thông tin MRP nội bộ
+      </span>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <h1>CẨM NANG HƯỚNG DẪN SỬ DỤNG HỆ THỐNG MRP (SINGLE 2 V25.02)</h1>
+    <p>Tài liệu hướng dẫn từng bước cách nhập liệu và vận hành thực tế dành cho bộ phận Kinh doanh (Contract), Kỹ thuật (BOM), Mua hàng (Purchase Order), Quản lý Kho (Inventory) và Quản trị hệ thống.</p>
+  </section>
+
+  <!-- MAIN WRAPPER -->
+  <div class="main-container">
+    
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+      <div class="sidebar-role-panel">
+        <div class="sidebar-role-header">
+          <span class="sidebar-title">⚡ Lọc theo bộ phận sử dụng:</span>
+          <button type="button" class="btn-clear-role" id="sidebarResetRole" title="Xem tất cả">Tất cả</button>
+        </div>
+        <div class="sidebar-role-pills" id="sidebarRolePills">
+          <button class="role-pill active" data-role="all">⚡ Tất cả</button>
+          <button class="role-pill" data-role="merchandiser">💼 Hợp đồng &amp; F/G</button>
+          <button class="role-pill" data-role="technical">📐 Định mức BOM</button>
+          <button class="role-pill" data-role="purchasing">🛒 Mua hàng MRP</button>
+          <button class="role-pill" data-role="warehouse">📦 Kho Vật tư</button>
+          <button class="role-pill" data-role="admin">🛡️ Config &amp; Admin</button>
+        </div>
+        <div class="sidebar-filter-status" id="sidebarFilterStatus" style="display: none;">
+          <span id="filterBadgeText">Đang lọc: Tất cả</span>
+          <button type="button" class="btn-reset-filter" id="btnResetFilter" title="Xem tất cả">✕</button>
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-title">Trình tự các trang theo luồng</div>
+      <ul class="sidebar-nav" id="sidebarNav">
+        <li data-role="common"><a href="#pipeline" class="active">Sơ đồ Luồng Vận hành</a></li>
+        <li class="sidebar-divider"></li>
+        <li data-role="admin technical purchasing merchandiser"><a href="#sec-config">1. Config (Danh mục &amp; 6 Bảng mã)</a></li>
+        <li data-role="technical purchasing warehouse admin"><a href="#sec-material-master">2. Material Master (Vật tư gốc)</a></li>
+        <li data-role="technical merchandiser admin"><a href="#sec-bom-list">3. Bom › List (Tạo / Copy BOM)</a></li>
+        <li data-role="technical merchandiser admin"><a href="#sec-bom-manage">4. Bom › Manage (Định mức cắt)</a></li>
+        <li class="sidebar-divider"></li>
+        <li data-role="merchandiser admin"><a href="#sec-contract-active">5. Contract › Active (Tạo Hợp đồng)</a></li>
+        <li data-role="purchasing merchandiser admin"><a href="#sec-purchase-order">6. Purchase Order (Đặt mua MRP)</a></li>
+        <li data-role="purchasing warehouse admin"><a href="#sec-mat-po-status">7. Mat PO status (Xem tiến độ PO)</a></li>
+        <li class="sidebar-divider"></li>
+        <li data-role="warehouse purchasing admin"><a href="#sec-income-status">8. Income status (Nhập kho)</a></li>
+        <li data-role="warehouse admin"><a href="#sec-outgo-status">9. Outgo status (Xuất kho)</a></li>
+        <li data-role="warehouse purchasing admin"><a href="#sec-inventory">10. Inventory (Xem tồn kho R/M)</a></li>
+        <li class="sidebar-divider"></li>
+        <li data-role="merchandiser warehouse admin"><a href="#sec-shipment">11. Shipment (Đóng gói &amp; Giao hàng)</a></li>
+        <li data-role="merchandiser warehouse admin"><a href="#sec-stock">12. Stock (Xem tồn kho Thành phẩm)</a></li>
+        <li class="sidebar-divider"></li>
+        <li data-role="admin"><a href="#sec-admin">13. Admin (Tài khoản)</a></li>
+        <li data-role="common"><a href="#sec-faq">14. Lưu ý &amp; Hỏi Chatbot</a></li>
+      </ul>
+    </aside>
+
+    <!-- CONTENT BODY -->
+    <main class="content">
+
+      <!-- PIPELINE INTERACTIVE DIAGRAM -->
+      <section class="pipeline-card" id="pipeline" data-role="common">
+        <div class="pipeline-title">
+          <span>🔄</span> Trình Tự Thao Tác Từ Đầu Đến Cuối Trên Hệ Thống (SINGLE 2 V25.02)
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">
+          Nhấp vào từng bước bên dưới để nhảy tới hướng dẫn chi tiết: <b>Trang đó dùng để nhập cái gì</b> và <b>Các bước thao tác để hoàn thành mục tiêu</b>. (Nếu cần tra cứu sâu về ý nghĩa từng cột, cách đọc trạng thái, màu sắc hay mã lỗi, bạn chỉ cần bấm hỏi <b>Chatbot AI 💬</b> ở góc phải dưới màn hình).
+        </p>
+        <div class="pipeline-steps">
+          <div class="pipe-step" onclick="location.href='#sec-config'">
+            <div class="pipe-num">1</div>
+            <div class="pipe-name">Config &amp; Code</div>
+            <div class="pipe-sub">Nhập Buyer, NCC, Kho, 6 Bảng mã</div>
+          </div>
+          <div class="pipe-step" onclick="location.href='#sec-material-master'">
+            <div class="pipe-num">2</div>
+            <div class="pipe-name">Material Master</div>
+            <div class="pipe-sub">Nhập mã Nguyên phụ liệu &amp; Giá</div>
+          </div>
+          <div class="pipe-step" onclick="location.href='#sec-bom-manage'">
+            <div class="pipe-num">3</div>
+            <div class="pipe-name">BOM Data</div>
+            <div class="pipe-sub">Nhập Định mức vật tư cho Style</div>
+          </div>
+          <div class="pipe-step" onclick="location.href='#sec-contract-active'">
+            <div class="pipe-num">4</div>
+            <div class="pipe-name">Contract Active</div>
+            <div class="pipe-sub">Nhập Hợp đồng, PO# &amp; Khớp BOM</div>
+          </div>
+          <div class="pipe-step" onclick="location.href='#sec-purchase-order'">
+            <div class="pipe-num">5</div>
+            <div class="pipe-name">Purchase Order</div>
+            <div class="pipe-sub">Tạo PO (MAKE PO) ➔ Đổi ORDERED</div>
+          </div>
+          <div class="pipe-step" onclick="location.href='#sec-mat-po-status'">
+            <div class="pipe-num">6</div>
+            <div class="pipe-name">Mat PO Status</div>
+            <div class="pipe-sub">Kiểm tra tiến độ PO đã đặt</div>
+          </div>
+          <div class="pipe-step" onclick="location.href='#sec-income-status'">
+            <div class="pipe-num">7</div>
+            <div class="pipe-name">Income &amp; Outgo</div>
+            <div class="pipe-sub">Tải Excel Nhập kho &amp; Xuất kho</div>
+          </div>
+          <div class="pipe-step" onclick="location.href='#sec-shipment'">
+            <div class="pipe-num">8</div>
+            <div class="pipe-name">Shipment &amp; Stock</div>
+            <div class="pipe-sub">Giao hàng &amp; Xem tồn F/G</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1. CONFIG -->
+      <section class="module-section" id="sec-config" data-role="admin technical purchasing merchandiser">
+        <div class="module-header">
+          <div class="module-title-wrap">
+            <span class="module-tag">BƯỚC 1: THIẾT LẬP DANH MỤC NỀN</span>
+            <h2 class="module-title">1. Trang Thiết Lập Danh Mục Gốc &amp; 6 Bảng Mã Chuẩn (Config)</h2>
+          </div>
+          <div class="breadcrumb-trail"><span class="breadcrumb-label">📁 Menu:</span> CONFIG ▶ Buyer / Supplier / Consignee / Exchange / Code / Location</div>
+        </div>
+        <div class="submodule-card">
+          <div class="submodule-title">1. Các Trang Thiết Lập Danh Mục Chuẩn (Phân Hệ CONFIG)</div>
+          <div class="submodule-title" style="font-size:1rem;">📝 Các trang trong menu CONFIG dùng để nhập cái gì?</div>
+          <p class="submodule-desc">
+            Dùng để <b>nhập toàn bộ dữ liệu danh mục nền tảng</b> trước khi tạo Hợp đồng, BOM hay Đơn mua PO:<br>
+            1. <b><code>Config › Buyer</code> (<code>/mrp/config/buyer</code>):</b> Nhập tên Khách hàng (<code>Buyer-001</code>, <code>Buyer-002</code>), địa chỉ, SĐT và người liên hệ (PIC).<br>
+            2. <b><code>Config › Matl. supplier</code> (<code>/mrp/config/matl-supplier</code>):</b> Nhập thông tin Nhà cung cấp nguyên phụ liệu (<code>Supplier-001</code>, <code>Supplier-002</code>), quốc gia, SĐT và người liên hệ.<br>
+            3. <b><code>Config › Matl. consignee</code> (<code>/mrp/config/matl-consignee</code>):</b> Nhập tên Pháp nhân / Nhà máy nhận hàng in trên đơn PO (<code>BETHELVINA CO.,LTD</code>).<br>
+            4. <b><code>Config › Exchange</code> (<code>/mrp/config/exchange</code>):</b> Nhập tỷ giá quy đổi giữa các đồng tiền (<code>USD</code>, <code>VND</code>, <code>KRW</code>, <code>CNY</code>, <code>JPY</code>, <code>EUR</code>).<br>
+            5. <b><code>Config › Code</code> (<code>/mrp/config/code</code>):</b> Nhập <b>6 bảng mã chuẩn trên cùng 1 màn hình</b> gồm: Nhóm vật tư (<code>R/M Category</code>: <code>FABRIC</code>, <code>MESH</code>, <code>PACKING</code>), Đơn vị tính (<code>Unit</code>: <code>YDS</code>, <code>MET</code>, <code>PCS</code>), Mã quản lý (<code>MA #</code>), Mã màu sản phẩm (<code>Color code-Item</code>), Mã màu nguyên phụ liệu (<code>Color code-Material</code>) và Mã kiểu dáng (<code>Style code</code>: <code>Stl001</code>, <code>Stl002</code>).<br>
+            6. <b><code>Config › Location</code> (<code>/mrp/config/location</code>):</b> Nhập mã các Vị trí kho và Xưởng sản xuất (<code>Factory01-Material-T001</code>, <code>Factory01-Material-T002</code>...).
+          </p>
+
+          <div class="scenario-box">
+            <span class="scenario-title">✅ CÁC BƯỚC THAO TÁC ĐỂ NHẬP DỮ LIỆU TRONG PHÂN HỆ CONFIG:</span>
+            <ul class="steps-list">
+              <li class="step-item">
+                <span class="step-num">BƯỚC 1:</span>
+                <div class="step-text">
+                  <b>Tại các trang <code>Buyer</code>, <code>Matl. supplier</code>, <code>Matl. consignee</code>, <code>Location</code>:</b><br>
+                  Bấm nút xanh lá <span class="btn-badge btn-success">+ Add</span> ở góc trái ➔ điền Tên, Địa chỉ, SĐT và thông tin người liên hệ (PIC) ➔ bấm <b>Save</b>. (Nếu muốn sửa dòng đã có, bấm nút <span class="btn-badge btn-success">Manage</span> hoặc <span class="btn-badge btn-primary">Edit</span> ở dòng đó).
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 2:</span>
+                <div class="step-text">
+                  <b>Tại trang <code>Config › Code</code> (6 Bảng mã chuẩn):</b><br>
+                  • <b>Thêm lẻ từng mã:</b> Tại khung bảng mã tương ứng (VD: <code>Style code</code> hoặc <code>Color code-Item</code>), bấm nút xanh lá <span class="btn-badge btn-success">+ ADD</span> ➔ nhập Mã và Tên ➔ bấm lưu.<br>
+                  • <b>Thêm hàng loạt bằng Excel:</b> Bấm nút vàng cam <span class="btn-badge btn-warning">⬇ TEM</span> để tải mẫu Excel của bảng đó ➔ điền danh sách mã ➔ bấm nút xanh dương <span class="btn-badge btn-primary">⬆ UP</span> để tải lên.
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 3:</span>
+                <div class="step-text">
+                  <b>Tại trang <code>Config › Exchange</code> (Tỷ giá ngoại tệ):</b><br>
+                  Nhập trực tiếp tỷ giá quy đổi mới vào ô tương ứng rồi bấm nút xanh lá <span class="btn-badge btn-success">APPLY</span> để cập nhật.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Giao diện trang Config › Code (Nhập 6 bảng mã chuẩn trên cùng 1 màn hình)</span>
+              <span>Mỗi bảng đều có nút + ADD (thêm lẻ), ⬆ UP (tải Excel) và ⬇ TEM (tải file mẫu)</span>
+            </div>
+            <img src="pages/16_config_code.png" alt="Config Code">
+          </div>
+
+          <div class="chat-msg-chips" style="margin-top: 0.5rem;">
+            <span class="chat-chip" onclick="askQuestion('Thông tin các trang Config')">💬 Hỏi Chatbot: Chi tiết tiêu đề cột các trang Config</span>
+            <span class="chat-chip" onclick="askQuestion('6 bảng mã tại Config Code')">💬 Hỏi Chatbot: Giải thích 6 bảng mã trong Config › Code</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. MATERIAL MASTER -->
+      <section class="module-section" id="sec-material-master" data-role="technical purchasing warehouse admin">
+        <div class="module-header">
+          <div class="module-title-wrap">
+            <span class="module-tag">BƯỚC 2: KHAI BÁO VẬT TƯ GỐC</span>
+            <h2 class="module-title">2. Trang Danh Mục Nguyên Phụ Liệu Gốc (Material Master)</h2>
+          </div>
+          <div class="breadcrumb-trail"><span class="breadcrumb-label">📁 Menu:</span> INVENTORY CONTROL ▶ Material Master</div>
+        </div>
+        <div class="submodule-card">
+          <div class="submodule-title">2. Trang Danh Mục Nguyên Phụ Liệu Gốc (Material Master)</div>
+          <p class="submodule-desc" style="margin-bottom:0.5rem;">
+            <b>📁 Đường dẫn Menu:</b> <code>INVENTORY CONTROL ▶ Material Master</code> (<code>/mrp/inventory-control/material-master</code>)
+          </p>
+          <div class="submodule-title" style="font-size:1rem;">📝 Trang này dùng để nhập cái gì?</div>
+          <p class="submodule-desc">
+            Dùng để <b>khai báo hồ sơ gốc của từng loại nguyên phụ liệu</b> trước khi đưa vào BOM hoặc mua hàng, gồm: Nhà cung cấp (<code>Supplier</code>), Nhóm vật tư (<code>Category</code>: Vải, Lưới, Bao bì), Mã nhóm quản lý (<code>MA #</code>), Tên tiếng Việt (<code>NPL Name</code>), Tên tiếng Anh (<code>R/M Name</code>), Màu vật tư (<code>Color</code>), Đơn vị tính (<code>Unit</code>), Đơn giá mua (<code>Unit Price</code>), Tiền tệ (<code>Currency</code>) và Quy cách (<code>Spec</code>).
+          </p>
+
+          <div class="scenario-box">
+            <span class="scenario-title">✅ CÁC BƯỚC THAO TÁC ĐỂ THÊM MỚI NGUYÊN PHỤ LIỆU:</span>
+            <ul class="steps-list">
+              <li class="step-item">
+                <span class="step-num">CÁCH 1:</span>
+                <div class="step-text">
+                  <b>Nhập từng mã nguyên phụ liệu trực tiếp trên web:</b><br>
+                  1. Bấm nút xanh lá <span class="btn-badge btn-success">+ Create</span> ở góc trên bên trái.<br>
+                  2. Chọn <code>Supplier</code> (VD: <code>Supplier-001</code>), <code>Category</code> (<code>FABRIC</code> / <code>MESH</code> / <code>PACKING</code>), <code>MA #</code> (<code>MA001</code>), nhập Tên vật tư (<code>Fabric name 001</code>), chọn Màu (<code>Blue-321</code>), ĐVT (<code>YDS</code> / <code>MET</code> / <code>PCS</code>) và nhập Đơn giá (<code>$1.0000 USD</code>).<br>
+                  3. Bấm lưu để hệ thống tự động cấp mã chuẩn (VD trên ảnh: 8 mã <code>FAB00000001..004</code>, <code>MES00000001..002</code>, <code>PAK00000001..002</code>).
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">CÁCH 2:</span>
+                <div class="step-text">
+                  <b>Nhập hàng loạt từ file Excel hoặc Google Sheets:</b><br>
+                  1. Bấm nút vàng cam <span class="btn-badge btn-warning">Template</span> để tải file Excel mẫu về máy.<br>
+                  2. Điền danh sách nguyên phụ liệu vào file mẫu theo đúng các mã đã có trong <code>Config › Code</code>.<br>
+                  3. Bấm nút xanh ngọc <span class="btn-badge btn-info">Import</span> (hoặc <span class="btn-badge btn-info">Import (From Sheets)</span>) và chọn file vừa điền để nạp toàn bộ danh sách lên hệ thống.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Giao diện toàn màn hình trang Inventory control › Material Master</span>
+              <span>Ví dụ 8 mã nguyên phụ liệu gốc (FAB00000001..004, MES00000001..002, PAK00000001..002) hiển thị đầy đủ các cột</span>
+            </div>
+            <img src="pages/09_material_master.png" alt="Material Master">
+          </div>
+
+          <div class="chat-msg-chips" style="margin-top: 0.5rem;">
+            <span class="chat-chip" onclick="askQuestion('Tiêu đề cột màn hình Material Master')">💬 Hỏi Chatbot: Giải nghĩa các cột trang Material Master</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3 & 4. BOM DATA -->
+      <section class="module-section" id="sec-bom-list" data-role="technical merchandiser admin">
+        <div class="module-header">
+          <div class="module-title-wrap">
+            <span class="module-tag">BƯỚC 3: LẬP ĐỊNH MỨC KỸ THUẬT</span>
+            <h2 class="module-title">3 &amp; 4. Trang Quản Lý Định Mức Kỹ Thuật (Bom › List &amp; Manage)</h2>
+          </div>
+          <div class="breadcrumb-trail"><span class="breadcrumb-label">📁 Menu:</span> BOM DATA ▶ List (/mrp/bom-data/list) &amp; Manage (/mrp/bom-data/manage)</div>
+        </div>
+        <div class="submodule-card">
+          <div class="submodule-title">3. Trang Danh Sách Định Mức (Bom › List)</div>
+          <div class="submodule-title" style="font-size:1rem;">📝 Trang này dùng để nhập cái gì?</div>
+          <p class="submodule-desc">
+            Dùng để <b>khởi tạo tên bảng định mức BOM mới</b> (chọn <code>BUYER</code>, chọn mã hàng <code>STYLE CODE</code>, đặt tên phiên bản <code>REVISION</code> như <code>v0.1</code>), hoặc <b>nhân bản nhanh (<code>COPY</code>)</b> một bảng BOM đã có sang mã hàng mới, và <b>Khóa / Mở khóa (<code>LOCK / UNLOCK</code>)</b> quyền chỉnh sửa BOM.
+          </p>
+
+          <div class="scenario-box">
+            <span class="scenario-title">✅ CÁC BƯỚC THAO TÁC TRÊN TRANG BOM › LIST:</span>
+            <ul class="steps-list">
+              <li class="step-item">
+                <span class="step-num">BƯỚC 1:</span>
+                <div class="step-text">
+                  <b>Tạo BOM mới (<span class="btn-badge btn-success">+ Create new BOM</span>) hoặc Sao chép BOM (<span class="btn-badge btn-primary">COPY</span>):</b><br>
+                  • <b>Khi tạo mới:</b> Bấm nút xanh lá <span class="btn-badge btn-success">+ Create new BOM</span> ở góc trái để mở hộp thoại <b>GENERATE NEW BOM</b> ➔ Chọn khách hàng tại ô <code>BUYER</code> (VD: <code>Buyer-001</code>), chọn mã hàng tại ô <code>STYLE CODE</code> (VD: <code>Stl001</code> - tên <code>STYLE NAME</code> sẽ tự động điền), nhập phiên bản vào ô <code>REVISION</code> (VD: <code>v0.1</code>) rồi bấm nút xanh lá <span class="btn-badge btn-success">GENERATE</span>.<br>
+                  • ⚠️ <b>Lưu ý quan trọng:</b> Nếu trong cửa sổ <b>GENERATE NEW BOM</b> bạn <b>không tìm thấy tên Khách hàng (<code>BUYER</code>) hoặc không thấy tên Mã hàng (<code>STYLE CODE</code>)</b> trong danh sách xổ xuống, hãy vào menu <b><code>CONFIG ▶ Code</code></b> (tại bảng <b><code>Style code</code></b> góc dưới bên phải để bấm <code>+ ADD</code> tạo thêm mã Style mới) hoặc vào <b><code>CONFIG ▶ Buyer</code></b> (để tạo thêm Khách hàng mới) trước!<br>
+                  • <b>Khi sao chép từ BOM tương tự:</b> Bấm nút xanh dương <span class="btn-badge btn-primary">COPY</span> ở cuối dòng BOM mẫu (VD: copy từ <code>Stl001 v0.1</code> sang <code>Stl002 v0.1</code>) để tiết kiệm thời gian nhập lại.
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 2:</span>
+                <div class="step-text">
+                  Bấm nút màu xanh lá <span class="btn-badge btn-success">MANAGE</span> ở cuối dòng BOM vừa tạo để chuyển sang trang <code>Bom › Manage</code> và bắt đầu nhập chi tiết nguyên phụ liệu.
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 3:</span>
+                <div class="step-text">
+                  Sau khi đã hoàn thiện định mức và muốn chống sửa nhầm, quay lại trang <code>Bom › List</code>, tick chọn ô vuông ở dòng BOM đó rồi bấm nút đỏ <span class="btn-badge btn-danger">LOCK</span> trên tiêu đề cột (bấm <span class="btn-badge btn-info">UNLOCK</span> khi cần mở lại để sửa).
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Giao diện toàn màn hình trang Bom › List</span>
+              <span>Danh sách các bảng định mức Stl001 (v0.1, v0.2) và Stl002 (v0.1)</span>
+            </div>
+            <img src="pages/06_bom_list.png" alt="BOM List">
+          </div>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Hộp thoại GENERATE NEW BOM khi bấm nút + Create new BOM</span>
+              <span>Nếu không thấy tên Khách hàng (BUYER) hoặc Mã hàng (STYLE CODE), cần vào trang CONFIG › Buyer hoặc CONFIG › Code để tạo thêm</span>
+            </div>
+            <img src="pages/07_bom_create_modal.png" alt="Generate New BOM Modal">
+          </div>
+        </div>
+        <div class="submodule-card" id="sec-bom-manage">
+          <div class="submodule-title">4. Trang Nhập Chi Tiết Định Mức Kỹ Thuật (Bom › Manage)</div>
+          <div class="submodule-title" style="font-size:1rem;">📝 Trang này dùng để nhập cái gì?</div>
+          <p class="submodule-desc">
+            Dùng để <b>nhập cấu trúc nguyên phụ liệu để sản xuất ra 1 sản phẩm hoàn chỉnh</b>, bao gồm: các màu của sản phẩm (<code>Color option</code>), các nhóm vật tư (<code>Group#1</code>, <code>Group#2</code>...), chọn mã nguyên phụ liệu từ danh mục gốc (<code>R/M Code</code>), chỉ định vật tư đó dùng cho màu nào (<code>Black-001</code>, <code>White-001</code> hay dùng chung <code>COMMON</code>), và nhập tên chi tiết cắt (<code>PART &gt; PIECE NAME</code>) cùng kích thước Dài (<code>L</code>) × Rộng (<code>W</code>) × Số mảnh (<code>PCS</code>) để hệ thống tự tính ra lượng tiêu hao (<code>CONSUMPTION</code>) và đơn giá vật tư cho 1 sản phẩm.
+          </p>
+
+          <div class="scenario-box">
+            <span class="scenario-title">✅ CÁC BƯỚC THAO TÁC ĐỂ HOÀN THÀNH BẢNG ĐỊNH MỨC TRÊN BOM › MANAGE:</span>
+            <ul class="steps-list">
+              <li class="step-item">
+                <span class="step-num">BƯỚC 1:</span>
+                <div class="step-text">
+                  Nếu vào trực tiếp từ menu <code>BOM DATA ▶ Manage</code>, bấm nút xanh lá <span class="btn-badge btn-success">Open BOM</span> ở góc trái để chọn bảng BOM cần làm việc (VD: <code>Buyer-001 | Stl001 | v0.1</code>). Tiếp theo bấm nút xanh dương <span class="btn-badge btn-primary">Basic info</span>: Đảm bảo trạng thái là <b><code>Manage</code></b> và thêm đủ các màu của sản phẩm tại mục <code>Color option ➔ Add</code> (VD: <code>Black-001</code>, <code>White-001</code>).
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 2:</span>
+                <div class="step-text">
+                  Bấm nút <span class="btn-badge btn-primary">Add GP</span> ở cột <code>GROUP</code> để tạo nhóm vật tư (<code>Group#1</code>), sau đó bấm nút dấu cộng <span class="btn-badge btn-primary">+</span> trong nhóm để thêm các dòng nguyên phụ liệu.
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 3:</span>
+                <div class="step-text">
+                  Tại mỗi dòng nguyên phụ liệu (khối <code>RAW MATERIAL</code> bên trái):<br>
+                  • Ở cột <code>COLOR CODE</code>: <b>Tick chọn (☑)</b> = chế độ <code>COLOR</code> (tách riêng từng màu sản phẩm như <code>Black-001</code>, <code>White-001</code> để chọn mã vật tư khác nhau cho mỗi màu); <b>Bỏ tick (☐)</b> = chế độ <code>COMMON</code> (1 dòng dùng chung vật tư cho tất cả các màu).<br>
+                  • Ở cột <code>R/M CODE</code>: Bấm nút xanh dương <span class="btn-badge btn-primary">SEL</span> ➔ chọn mã nguyên phụ liệu từ <code>Material Master</code>.<br>
+                  👉 <b>Ví dụ trực quan trên ảnh (<code>Stl001 v0.1</code>):</b> Dòng 1 (tick ☑ <code>COLOR</code>) chọn vải <code>FAB00000001</code> cho màu <code>Black-001</code> và <code>FAB00000002</code> cho màu <code>White-001</code>; Dòng 2 &amp; 3 (tick ☑) chọn lưới <code>MES00000001</code> &amp; <code>MES00000002</code>; Dòng 4 (bỏ tick ☐ <code>COMMON</code>) chọn túi đóng gói <code>PAK00000001</code> dùng chung mọi màu.
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 4:</span>
+                <div class="step-text">
+                  Tại khối <code>CATEGORY</code> &amp; <code>CONSUMPTION</code> bên phải: Bấm nút xanh dương <span class="btn-badge btn-primary">MANAGE</span> để nhập các chi tiết cắt (VD: <code>Part-1 &gt; Piece-01</code>, <code>Piece-02</code>... với chiều dài <code>L</code>, chiều rộng <code>W</code>, số chi tiết <code>PCS</code>). Hệ thống lập tức tự tính ra cột <code>CONSUMPTION</code> (VD: <code>7.2 YDS</code> vải, <code>1.2 MET</code> lưới, <code>0.1 PCS</code> bao bì) và tổng giá vốn vật tư <b><code>MATERIAL COST (MAIN COLOR) = $8.5000</code></b>!
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Giao diện trang Bom › Manage - Phần Trái (Khối RAW MATERIAL &amp; Chi tiết cắt)</span>
+              <span>Ví dụ Stl001 v0.1: Chọn mã vải/lưới/bao bì theo từng màu Black-001, White-001 hoặc COMMON</span>
+            </div>
+            <img src="pages/08_bom_manage_stl001.png" alt="BOM Manage Stl001 Left">
+          </div>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Giao diện trang Bom › Manage - Phần Phải (Khối CATEGORY, CONSUMPTION &amp; MATERIAL COST)</span>
+              <span>Tự động tính định mức tiêu hao (7.2 YDS, 1.2 MET, 0.1 PCS) và tổng giá vốn vật tư $8.5000</span>
+            </div>
+            <img src="pages/08b_bom_manage_stl001_right.png" alt="BOM Manage Stl001 Right">
+          </div>
+
+          <div class="chat-msg-chips" style="margin-top: 0.5rem;">
+            <span class="chat-chip" onclick="askQuestion('Nhấn GENERATE NEW BOM không thấy khách hàng hoặc style')">💬 Hỏi Chatbot: Không thấy Buyer / Style khi tạo BOM mới?</span>
+            <span class="chat-chip" onclick="askQuestion('Tiêu đề cột màn hình BOM List và BOM Manage')">💬 Hỏi Chatbot: Giải nghĩa các cột trang BOM</span>
+            <span class="chat-chip" onclick="askQuestion('Hướng dẫn màn hình Bom Manage và nút Basic info')">💬 Hỏi Chatbot: Chi tiết nút Basic info, SEL &amp; RESET by R/M</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. CONTRACT STATUS ACTIVE -->
+      <section class="module-section" id="sec-contract-active" data-role="merchandiser admin">
+        <div class="module-header">
+          <div class="module-title-wrap">
+            <span class="module-tag">BƯỚC 4: TẠO HỢP ĐỒNG</span>
+            <h2 class="module-title">5. Trang Quản Lý Hợp Đồng (Contract Status › Active)</h2>
+          </div>
+          <div class="breadcrumb-trail"><span class="breadcrumb-label">📁 Menu:</span> CONTRACT STATUS ▶ Active (/mrp/contract-status/active)</div>
+        </div>
+        <div class="submodule-card">
+          <div class="submodule-title">📝 Trang này dùng để nhập cái gì?</div>
+          <p class="submodule-desc">
+            Dùng để <b>nhập Hợp đồng mới của khách hàng</b>, bao gồm: Mã hợp đồng (<code>Contract #</code>), Khách hàng (<code>Buyer</code>), các đơn hàng con (<code>PO #</code>, Ngày PO, Ngày giao hàng), Mã kiểu dáng (<code>Style code</code>), Số lượng đặt hàng theo từng Màu/Size (<code>PO Qty</code>), Giá gia công (<code>Labor cost</code>), Giá bán (<code>FOB</code>) và chọn phiên bản định mức (<code>BOM</code>) áp dụng cho mã hàng đó.
+          </p>
+
+          <div class="scenario-box">
+            <span class="scenario-title">✅ CÁC BƯỚC THAO TÁC ĐỂ HOÀN THÀNH MỤC TIÊU TẠO &amp; KHỚP HỢP ĐỒNG:</span>
+            <ul class="steps-list">
+              <li class="step-item">
+                <span class="step-num">BƯỚC 1:</span>
+                <div class="step-text">
+                  Tại góc trên bên trái màn hình <code>Contract Status › Active</code>, bấm nút màu xanh lá <span class="btn-badge btn-success">+ Add CONTRACT</span> (hoặc nhấp vào mã <code>✎ Contract-001</code> trên bảng nếu muốn sửa hợp đồng đã có) để mở cửa sổ <b>MANAGE ORDER</b>.
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 2:</span>
+                <div class="step-text">
+                  Ở hàng trên cùng của cửa sổ <b>MANAGE ORDER</b>: Nhập mã hợp đồng vào ô <code>Contract #</code> (VD: <code>Contract-001</code>), chọn khách hàng tại ô <code>Buyer</code> (VD: <code>Buyer-001</code>), sau đó bấm nút <span class="btn-badge btn-success">+ Add PO</span> để thêm đơn đặt hàng.
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 3:</span>
+                <div class="step-text">
+                  Nhập số <code>PO #</code> (VD: <code>PO 1</code>), chọn ngày <code>PO date</code> (VD: <code>2026/11/01</code>), ngày xuất dự kiến <code>Requested / Target ship date</code>, rồi bấm nút <span class="btn-badge btn-success">+ Add Style</span> ở góc phải khung PO.
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 4:</span>
+                <div class="step-text">
+                  Chọn mã hàng tại ô <code>Style code</code> (VD: chọn <code>Stl001</code> và thêm tiếp tab <code>Stl002</code>). Bấm nút <span class="btn-badge btn-success">ADD</span> ở bảng màu bên dưới để chọn các màu và nhập số lượng + đơn giá.<br>
+                  👉 <b>Ví dụ trực quan trên ảnh:</b> Hợp đồng <code>Contract-001</code> (<code>PO 1</code>) nhập mã <code>Stl001</code> gồm màu <code>Black-001</code> (Số lượng <code>Qty = 1000</code>, Đơn giá <code>Unit price = 16</code> ➔ Thành tiền <code>$16,000</code>) và màu <code>White-001</code> (<code>Qty = 1000</code>, <code>Unit price = 16</code> ➔ <code>$16,000</code>).
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 5:</span>
+                <div class="step-text">
+                  Kiểm tra cột <b>BOM</b> ở cuối mỗi dòng màu: nếu đã hiện chữ xanh lá <b><code>Match</code></b> nghĩa là mã hàng và màu đó đã khớp định mức kỹ thuật (bấm nút <span class="btn-badge btn-success">Material Cost</span> nếu muốn xem tổng giá vốn nguyên phụ liệu). Cuối cùng kéo xuống dưới cùng bấm nút <span class="btn-badge btn-success">SAVE</span> để lưu hợp đồng.<br>
+                  <i>• Lưu ý tránh lỗi thao tác: Nếu bấm <code>+ Add CONTRACT</code> nhưng đổi ý đóng cửa sổ ngay mà chưa nhập gì, hệ thống sẽ tạo ra 1 dòng trống (<code>___</code>) trên bảng Active — khi đó hãy tick ô vuông cột <code>DEL</code> của dòng trống đó và bấm nút đỏ <span class="btn-badge btn-danger">DEL</span> để xóa.</i>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Giao diện toàn màn hình trang Contract Status › Active (Click vào ảnh để phóng to)</span>
+              <span>Ví dụ thực tế: Contract-001 (3,000 sp) &amp; Contract-002 (4,000 sp) hiển thị đầy đủ các cột từ trái sang phải</span>
+            </div>
+            <img src="pages/02_contract_active.png" alt="Contract Status Active">
+          </div>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Giao diện toàn màn hình cửa sổ MANAGE ORDER của Contract-001</span>
+              <span>Ví dụ: PO 1 gồm Stl001 (Black-001: 1,000 sp &amp; White-001: 1,000 sp) và Stl002 đều báo BOM = Match (Xanh lá)</span>
+            </div>
+            <img src="pages/03_contract_manage_order_modal.png" alt="Manage Order Modal">
+          </div>
+
+          <div class="chat-msg-chips" style="margin-top: 0.5rem;">
+            <span class="chat-chip" onclick="askQuestion('Tiêu đề cột màn hình Contract Active')">💬 Hỏi Chatbot: Ý nghĩa các cột trang Contract Active</span>
+            <span class="chat-chip" onclick="askQuestion('Tại sao không thấy Contract ở Purchase Order?')">💬 Hỏi Chatbot: Xử lý khi nút BOM báo đỏ Not match</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6 & 7. PURCHASE ORDER & MAT PO STATUS -->
+      <section class="module-section" id="sec-purchase-order" data-role="purchasing merchandiser warehouse admin">
+        <div class="module-header">
+          <div class="module-title-wrap">
+            <span class="module-tag">BƯỚC 5: TÍNH MRP &amp; ĐẶT MUA VẬT TƯ</span>
+            <h2 class="module-title">6 &amp; 7. Trang Đặt Mua MRP (Purchase Order) &amp; Xem Tiến Độ PO (Mat PO status)</h2>
+          </div>
+          <div class="breadcrumb-trail"><span class="breadcrumb-label">📁 Menu:</span> INVENTORY CONTROL ▶ Purchase Order / Mat PO status</div>
+        </div>
+        <div class="submodule-card">
+          <div class="submodule-title">6. Trang Tính Toán Nhu Cầu &amp; Phát Hành Đơn Mua Vật Tư (Purchase Order - Trọng Tâm MRP)</div>
+          <p class="submodule-desc" style="margin-bottom:0.5rem;">
+            <b>📁 Đường dẫn Menu:</b> <code>INVENTORY CONTROL ▶ Purchase Order</code> (<code>/mrp/inventory-control/purchase-order</code>)
+          </p>
+          <div class="submodule-title" style="font-size:1rem;">📝 Trang này dùng để nhập cái gì?</div>
+          <p class="submodule-desc">
+            Dùng để <b>lập và phát hành Đơn đặt mua nguyên phụ liệu (<code>MATERIAL PO #</code>) gửi Nhà cung cấp</b> cho từng Hợp đồng. Tại đây bạn nhập: Tỷ lệ hao hụt sản xuất (<code>② LOSS %</code>), Số lượng lấy từ tồn kho có sẵn (<code>② ASSIGN</code>), Số lượng đặt mua thực tế (<code>① ORDER QTY</code>), Đơn giá mua (<code>③ UNIT PRICE</code>), Đơn vị nhận hàng (<code>CONSIGNEE</code>), Ngày đặt hàng / Ngày dự kiến hàng về (<code>RM PO DATE / RM ETA</code>), và <b>chuyển trạng thái đơn mua từ <code>STANDBY</code> sang <code>ORDERED</code></b>.
+          </p>
+
+          <div class="scenario-box">
+            <span class="scenario-title">✅ 5 BƯỚC THAO TÁC ĐỂ HOÀN THÀNH PHÁT HÀNH ĐƠN MUA (PO) HỢP LỆ:</span>
+            <ul class="steps-list">
+              <li class="step-item">
+                <span class="step-num">BƯỚC 1:</span>
+                <div class="step-text">
+                  <b>Chọn Hợp đồng cần mua vật tư:</b><br>
+                  Tại ô <code>CONT #</code> trên đầu trang, chọn mã Hợp đồng (VD: <code>Contract-001</code> hoặc <code>Contract-002</code>). Hệ thống lập tức liệt kê toàn bộ nguyên phụ liệu của hợp đồng đó. <i>(Lưu ý: Nếu con số ở cột <code>CONS.(BOM)(AFTER)</code> hiện màu đỏ như <code>14400</code>, <code>2400</code>, <code>300</code> trên ảnh, nghĩa là định mức BOM vừa cập nhật khác với cột <code>BEFORE</code> — bạn có thể tick chọn ô vuông đầu cột và bấm nút xanh lá <span class="btn-badge btn-success">UPDATE</span> nếu muốn lấy theo định mức mới).</i>
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 2:</span>
+                <div class="step-text">
+                  <b>Nhập tỷ lệ hao hụt (<code>② LOSS %</code>) nếu có:</b><br>
+                  Nhấp vào con số ở cột <code>② LOSS %</code> (hoặc tick nhiều dòng rồi bấm nút <code>SET</code> trên tiêu đề cột) để nhập % hao hụt bù trừ sản xuất ➔ hệ thống tự động cộng thêm vào tổng nhu cầu <code>③ CONS.(LOSS)</code>.
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 3:</span>
+                <div class="step-text">
+                  <b>Bấm <span class="btn-badge btn-success">MAKE PO</span> để tạo mã đơn mua (hoặc bấm <span class="btn-badge btn-success">ADD</span> để gộp vào PO đã có):</b><br>
+                  • Tick chọn các ô vuông tại cột <code>SUPPLIER</code> của các dòng vật tư thuộc <b>cùng một Nhà cung cấp</b> ➔ bấm nút xanh lá <span class="btn-badge btn-success">MAKE PO</span> trên tiêu đề cột.<br>
+                  👉 <b>Ví dụ trực quan trên ảnh (<code>Contract-001</code>):</b> Tick 2 dòng vải (<code>FAB00000001</code>: <code>7,200 YDS</code> &amp; <code>FAB00000002</code>: <code>7,200 YDS</code>) của <code>Supplier-001</code> ➔ bấm <code>MAKE PO</code> sinh ra đơn <b><code>PO-R-261116-001</code></b> (Tổng tiền <code>AMOUNT = $18,000 USD</code>). Tiếp tục tick 3 dòng lưới &amp; bao bì của <code>Supplier-002</code> ➔ bấm <code>MAKE PO</code> sinh ra đơn <b><code>PO-R-261116-002</code></b> (<code>AMOUNT = $2,400 USD</code>).
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 4:</span>
+                <div class="step-text">
+                  <b>Kiểm tra / Nhập Số lượng đặt mua, Đơn giá &amp; Thông tin giao nhận:</b><br>
+                  Tại khối <code>Ⓔ MATERIAL PURCHASE ORDER</code> bên phải: Nhấp trực tiếp vào các ô <code>① ORDER QTY</code> (Số lượng đặt), <code>② ASSIGN</code> (Số lượng lấy từ kho nếu có), <code>③ UNIT PRICE</code> (Đơn giá: <code>1</code>, <code>1.5</code>), <code>CONSIGNEE</code>, <code>RM PO DATE</code> (<code>2026/11/16</code>) và <code>RM ETA</code> để kiểm tra hoặc chỉnh sửa rồi bấm <code>APPLY</code>.
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 5:</span>
+                <div class="step-text">
+                  <b>⚠️ BẮT BUỘC: Chuyển trạng thái PO từ <code>STANDBY</code> sang <code>ORDERED</code>:</b><br>
+                  Cuộn ngang bảng sang tận cùng bên phải tới cột <code>STATUS</code> (ngay sau cột <code>STATUS (MATERIAL)</code> ở cuối ảnh 2): Khi mới bấm <code>MAKE PO</code>, trạng thái mặc định là <b><code>STANDBY</code></b> (chờ duyệt). Bạn <b>phải nhấp vào chữ <code>STANDBY</code> (hoặc bấm nút xanh lá <span class="btn-badge btn-success">INFO</span> dưới cột <code>STATUS (MATERIAL)</code>), chọn đổi sang <code>ORDERED</code> rồi bấm <code>APPLY</code></b>.<br>
+                  👉 <i>Chỉ khi đã chuyển sang <b><code>ORDERED</code></b> thì số lượng đặt mua mới hiện lên ở cột <code>IN BALANCE</code> trong Kho và trang <code>Income status</code> mới cho phép bạn nhập kho lô hàng này!</i>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Giao diện trang Purchase Order (Contract-001) - Phần 1: Thông tin vật tư, Định mức BOM &amp; Tổng nhu cầu</span>
+              <span>Hiển thị khối MATERIAL INFORMATION, Ⓑ BOM CONSUMPTION (chữ đỏ 14400, 2400, 300 ở cột CONS.(BOM)(AFTER)) và Ⓒ GLOBAL PO QTY</span>
+            </div>
+            <img src="pages/10_purchase_order_contract001.png" alt="Purchase Order Contract-001 Left">
+          </div>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Giao diện trang Purchase Order (Contract-001) - Phần 2: Khối Ⓔ MATERIAL PURCHASE ORDER &amp; Ⓕ DELIVERY</span>
+              <span>Hiển thị số lượng đặt mua (7200, 1200, 1000, 200), đơn giá (1, 1.5), tổng tiền AMOUNT (18000 &amp; 2400 USD), ngày đặt (2026/11/16) và cột STATUS (MATERIAL)</span>
+            </div>
+            <img src="pages/10b_purchase_order_status_ordered.png" alt="Purchase Order Contract-001 Right">
+          </div>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Giao diện trang Purchase Order (Contract-002) - Trạng thái chưa tạo đơn mua (chưa bấm MAKE PO)</span>
+              <span>Các dòng vật tư hiện nút ADD và ô tick ở cột SUPPLIER (chưa gộp PO) — sẵn sàng tick chọn theo Supplier để bấm MAKE PO</span>
+            </div>
+            <img src="pages/11_purchase_order_contract002.png" alt="Purchase Order Contract-002">
+          </div>
+
+          <div class="chat-msg-chips" style="margin-top: 0.5rem;">
+            <span class="chat-chip" onclick="askQuestion('Tiêu đề cột màn hình Purchase Order')">💬 Hỏi Chatbot: Giải nghĩa các cột trang Purchase Order</span>
+            <span class="chat-chip" onclick="askQuestion('Phân biệt nút MAKE PO và nút ADD')">💬 Hỏi Chatbot: Phân biệt nút MAKE PO và nút ADD</span>
+            <span class="chat-chip" onclick="askQuestion('Ý nghĩa chữ số màu đỏ trên bảng')">💬 Hỏi Chatbot: Tại sao có con số màu đỏ trên bảng?</span>
+          </div>
+        </div>
+        <div class="submodule-card" id="sec-mat-po-status">
+          <div class="submodule-title">7. Trang Xem Tiến Độ Đơn Mua Vật Tư (Mat PO status)</div>
+          <p class="submodule-desc" style="margin-bottom:0.5rem;">
+            <b>📁 Đường dẫn Menu:</b> <code>INVENTORY CONTROL ▶ Mat PO status</code> (<code>/mrp/inventory-control/mat-po-status</code>)
+          </p>
+          <p class="submodule-desc">
+            <b>📌 Mục đích:</b> Đây là <b>trang chỉ xem tiến độ</b> các đơn đặt mua vật tư (<code>PO-R-...</code>) đã phát hành: kiểm tra trạng thái (<code>ORDERED</code>), tổng tiền, lượng đã nhập kho (<code>② W/H IN</code>) và lượng NCC còn nợ (<code>①-② BALANCE</code>).<br>
+            <b>✅ Thao tác nhanh:</b> Bấm <span class="btn-badge btn-dark">Refresh</span> để cập nhật số liệu mới nhất; bấm nút xanh lá <span class="btn-badge btn-success">Manage PO Group</span> ở cuối dòng nếu muốn mở lại đơn PO đó tại trang <code>Purchase Order</code>.
+          </p>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Giao diện trang Inventory control › Mat PO status</span>
+              <span>Ví dụ: 2 đơn PO-R-261116-001 ($18,000) &amp; PO-R-261116-002 ($2,400) đang ở trạng thái ORDERED</span>
+            </div>
+            <img src="pages/12_mat_po_status.png" alt="Mat PO status">
+          </div>
+
+          <div class="chat-msg-chips" style="margin-top: 0.5rem;">
+            <span class="chat-chip" onclick="askQuestion('Tiêu đề cột màn hình Mat PO status')">💬 Hỏi Chatbot: Giải nghĩa các cột trang Mat PO status</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8, 9 & 10. WAREHOUSE (INCOME, OUTGO, INVENTORY) -->
+      <section class="module-section" id="sec-income-status" data-role="warehouse purchasing admin">
+        <div class="module-header">
+          <div class="module-title-wrap">
+            <span class="module-tag">BƯỚC 6: NHẬP KHO, XUẤT KHO &amp; XEM TỒN KHO</span>
+            <h2 class="module-title">8, 9 &amp; 10. Trang Nhập Kho, Xuất Kho &amp; Xem Tồn Kho R/M (Income, Outgo &amp; Inventory)</h2>
+          </div>
+          <div class="breadcrumb-trail"><span class="breadcrumb-label">📁 Menu:</span> INVENTORY CONTROL ▶ Income status / Outgo status / Inventory</div>
+        </div>
+        <div class="submodule-card">
+          <div class="submodule-title">8. Trang Nhập Kho Nguyên Phụ Liệu (Income status)</div>
+          <p class="submodule-desc" style="margin-bottom:0.5rem;">
+            <b>📁 Đường dẫn Menu:</b> <code>INVENTORY CONTROL ▶ Income status</code> (<code>/mrp/inventory-control/income-status</code>)
+          </p>
+          <div class="submodule-title" style="font-size:1rem;">📝 Trang này dùng để nhập cái gì?</div>
+          <p class="submodule-desc">
+            Dùng để <b>tải file Excel phiếu nhập kho</b> khi Nhà cung cấp giao nguyên phụ liệu về kho. Nội dung nhập trên file Excel (bắt đầu từ dòng thứ 3) gồm: Ngày-Số phiếu (<code>DATE-NO</code> định dạng <code>YYYY/MM/DD-SN</code>), Nhà cung cấp (<code>SUPPLIER</code>), Vị trí kho nhận (<code>LOCATION</code>), Mã Hợp đồng (<code>CONTRACT #</code>), Mã nguyên phụ liệu (<code>CODE</code>), Tên vật tư (<code>NAME</code>), Số lượng thực nhập (<code>QTY</code>), Đơn vị tính (<code>UNIT</code>), Đơn giá (<code>PRICE</code>), Thành tiền (<code>AMOUNT</code>), Tiền tệ (<code>CURRENCY</code>), Khách hàng (<code>BUYER</code>), Khấu trừ (<code>DEBIT</code>), Mã <code>MA #</code> và Ngày kiểm tra chất lượng (<code>INSPECTION</code> định dạng <code>YYYY.MM.DD</code>).
+          </p>
+
+          <div class="scenario-box">
+            <span class="scenario-title">✅ 4 BƯỚC THAO TÁC ĐỂ HOÀN THÀNH NHẬP KHO NGUYÊN PHỤ LIỆU:</span>
+            <ul class="steps-list">
+              <li class="step-item">
+                <span class="step-num">BƯỚC 1:</span>
+                <div class="step-text">
+                  <b>Kiểm tra điều kiện trước khi nhập kho:</b><br>
+                  Đảm bảo đơn mua của lô hàng đó đã được chuyển từ <code>STANDBY</code> sang <b><code>ORDERED</code></b> tại trang <code>Purchase Order</code> (nếu chưa đổi sang <code>ORDERED</code>, khi tải file Excel sẽ báo lỗi không nhận diện được PO).
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 2:</span>
+                <div class="step-text">
+                  <b>Chuẩn bị file Excel nhập kho (Từ dòng thứ 3 trở đi):</b><br>
+                  Bấm nút vàng cam <span class="btn-badge btn-warning">TEMPLATE</span> trên màn hình để tải file Excel mẫu chuẩn của hệ thống về máy và điền dữ liệu từ dòng thứ 3 trở đi.<br>
+                  👉 <b>Ví dụ 1 dòng nhập kho chuẩn trong file Excel:</b><br>
+                  <code>DATE-NO: 2026/11/16-01</code> | <code>SUPPLIER: Supplier-001</code> | <code>LOCATION: Factory01-Material-T001</code> | <code>CONTRACT #: Contract-001</code> | <code>CODE: FAB00000001</code> | <code>NAME: Fabric name 001</code> | <code>QTY: 5000</code> | <code>UNIT: YDS</code> | <code>PRICE: 1</code> | <code>AMOUNT: 5000</code> | <code>CURRENCY: USD</code> | <code>BUYER: Buyer-001</code> | <code>DEBIT: N</code> | <code>MA #: MA001</code> | <code>INSPECTION: 2026.11.16</code>.
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 3:</span>
+                <div class="step-text">
+                  <b>Tải file Excel lên bảng kiểm duyệt:</b><br>
+                  Bấm nút xanh dương <span class="btn-badge btn-primary">UPLOAD EXCEL</span> trên thanh công cụ và chọn file Excel vừa chuẩn bị. Hệ thống sẽ đọc dữ liệu, tự động khớp cột <code>MATL PO #</code> và kiểm tra lỗi trên từng dòng.
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 4:</span>
+                <div class="step-text">
+                  <b>Kiểm tra báo lỗi và bấm <span class="btn-badge btn-success">✔ APPLY INCOME</span> để chốt nhập kho:</b><br>
+                  • Quan sát dòng trạng thái phía trên bảng: Khi hiện <b><code>• ERROR: 0</code></b> (không có lỗi đỏ, có thể có <code>WARNING</code> vàng như dòng <code>[WPO]Buyer-002 / Buyer-001</code> trên ảnh để nhắc kiểm tra lại), bấm nút xanh lá <span class="btn-badge btn-success">✔ APPLY INCOME</span> ➔ Chọn <b>YES</b> ở hộp thoại xác nhận để chính thức cộng hàng vào kho.<br>
+                  • Nếu có báo lỗi đỏ (<code>EFM</code>, <code>ECD</code>, <code>ECT</code>), bấm nút xanh lá <span class="btn-badge btn-success">INFO</span> để đối chiếu nguyên nhân, sửa lại trên file Excel rồi thực hiện lại Bước 3.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Giao diện trang Income status sau khi Upload Excel thành công (5 dòng vật tư của Contract-001)</span>
+              <span>Ví dụ thực tế: Bộ đếm • ERROR: 0 • WARNING: 1 (cảnh báo [WPO]Buyer-002 ở dòng 4), tự động khớp MATL PO # (PO-R-261116-001 &amp; 002) — sẵn sàng bấm ✔ APPLY INCOME</span>
+            </div>
+            <img src="pages/13_income_status_error_info.png" alt="Income Status">
+          </div>
+
+          <div class="chat-msg-chips" style="margin-top: 0.5rem;">
+            <span class="chat-chip" onclick="askQuestion('Giải mã lỗi EFM, ECD, ECT và WPO, WDF, WCD')">💬 Hỏi Chatbot: Giải mã các lỗi EFM, ECD, ECT khi Upload Excel</span>
+            <span class="chat-chip" onclick="askQuestion('Tiêu đề cột màn hình Income status và Outgo status')">💬 Hỏi Chatbot: Chi tiết các cột Excel Nhập kho</span>
+          </div>
+        </div>
+        <div class="submodule-card" id="sec-outgo-status">
+          <div class="submodule-title">9. Trang Xuất Kho Cấp Phát Sản Xuất (Outgo status)</div>
+          <p class="submodule-desc" style="margin-bottom:0.5rem;">
+            <b>📁 Đường dẫn Menu:</b> <code>INVENTORY CONTROL ▶ Outgo status</code> (<code>/mrp/inventory-control/outgo-status</code>)
+          </p>
+          <div class="submodule-title" style="font-size:1rem;">📝 Trang này dùng để nhập cái gì?</div>
+          <p class="submodule-desc">
+            Dùng để <b>tải file Excel phiếu xuất kho</b> khi cấp phát nguyên phụ liệu từ kho lưu trữ ra nhà máy/chuyền sản xuất. Nội dung nhập trên file Excel (bắt đầu từ dòng thứ 3) gồm: Ngày-Số phiếu (<code>DATE-NO</code> định dạng 2 số năm <code>YY/MM/DD-SN</code>), Mã nguyên phụ liệu (<code>CODE</code>), Mã <code>MA #</code>, Tên vật tư (<code>NAME</code>), Màu (<code>COLOR</code>), Số lượng xuất (<code>QTY</code>), Đơn vị tính (<code>UNIT</code>), Mã Hợp đồng (<code>CONTRACT #</code>), Nhà cung cấp (<code>SUPPLIER</code>), Đơn giá, Thành tiền, Tên mã hàng (<code>ITEM NAME</code>), Khách hàng (<code>BUYER</code>), Số PO khách (<code>BUYER PO</code>), Số Invoice (<code>REMARK / INV NO.</code>), Kho xuất đi (<code>FROM</code>) và Nơi nhận (<code>TO</code>).
+          </p>
+
+          <div class="scenario-box">
+            <span class="scenario-title">✅ 3 BƯỚC THAO TÁC ĐỂ HOÀN THÀNH XUẤT KHO CẤP PHÁT:</span>
+            <ul class="steps-list">
+              <li class="step-item">
+                <span class="step-num">BƯỚC 1:</span>
+                <div class="step-text">
+                  <b>Chuẩn bị file Excel xuất kho (Từ dòng thứ 3 trở đi):</b><br>
+                  Bấm nút vàng cam <span class="btn-badge btn-warning">TEMPLATE</span> trên màn hình để tải file Excel mẫu xuất kho chuẩn của hệ thống về máy và điền dữ liệu từ dòng thứ 3 trở đi.<br>
+                  👉 <b>Ví dụ 1 dòng xuất kho chuẩn trong file Excel:</b><br>
+                  <code>DATE-NO: 26/11/16-01</code> (Lưu ý dùng 2 chữ số năm <code>YY/MM/DD-SN</code>) | <code>CODE: FAB00000001</code> | <code>MA #: MA001</code> | <code>NAME: Fabric name 001</code> | <code>COLOR: Blue-321</code> | <code>QTY: 2000</code> | <code>UNIT: YDS</code> | <code>CONTRACT #: Contract-001</code> | <code>SUPPLIER: Supplier-001</code> | <code>FROM: Factory01-Material-T001</code> | <code>TO: Factory01-Material-T002</code>.
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 2:</span>
+                <div class="step-text">
+                  <b>Tải file Excel lên hệ thống:</b><br>
+                  Bấm nút xanh dương <span class="btn-badge btn-primary">UPLOAD EXCEL</span> và chọn file Excel xuất kho vừa lưu.
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 3:</span>
+                <div class="step-text">
+                  <b>Bấm <span class="btn-badge btn-success">✔ APPLY OUTGO</span> để chốt trừ tồn kho:</b><br>
+                  Kiểm tra bộ đếm báo <b><code>• ERROR: 0</code></b> ➔ bấm nút xanh lá <span class="btn-badge btn-success">✔ APPLY OUTGO</span> ➔ Chọn <b>YES</b> để hoàn tất xuất kho chính thức.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Giao diện trang Outgo status sau khi Upload Excel thành công (5 dòng xuất kho của Contract-001)</span>
+              <span>Ví dụ thực tế: Bộ đếm • ERROR: 0 • WARNING: 2 (cảnh báo [WPO] để tham chiếu), xuất 2000 YDS vải, 400 &amp; 300 MET lưới, 100 PCS bao bì — sẵn sàng bấm ✔ APPLY OUTGO</span>
+            </div>
+            <img src="pages/14_outgo_status_error_info.png" alt="Outgo Status">
+          </div>
+
+          <div class="chat-msg-chips" style="margin-top: 0.5rem;">
+            <span class="chat-chip" onclick="askQuestion('Giải mã lỗi EFM, ECD, ECT và WPO, WDF, WCD')">💬 Hỏi Chatbot: Lưu ý định dạng ngày &amp; kho khi Xuất kho</span>
+          </div>
+        </div>
+        <div class="submodule-card" id="sec-inventory">
+          <div class="submodule-title">10. Trang Xem Tồn Kho Nguyên Phụ Liệu (Inventory)</div>
+          <p class="submodule-desc" style="margin-bottom:0.5rem;">
+            <b>📁 Đường dẫn Menu:</b> <code>INVENTORY CONTROL ▶ Inventory</code> (<code>/mrp/inventory-control/inventory</code>)
+          </p>
+          <p class="submodule-desc">
+            <b>📌 Mục đích:</b> Đây là <b>trang tra cứu tồn kho nguyên phụ liệu</b> theo thời gian thực (Lượng đã nhập <code>IN</code>, Hàng đã đặt chờ về <code>IN BALANCE</code>, Lượng đã xuất <code>OUT</code>, Tồn khả dụng <code>INVENTORY</code>).<br>
+            <b>✅ Thao tác nhanh:</b> Mặc định ô lọc góc trái chọn <b><code>NOT ZERO</code></b> (chỉ hiện các mã có hàng đặt/tồn kho); muốn xem toàn bộ danh mục thì đổi sang <b><code>SHOW ALL</code></b> rồi bấm <b><code>🔍 Refresh</code></b>. Chọn ô <code>[ LOCATION ]</code> để lọc theo kho, bấm <span class="btn-badge btn-primary">HISTORY</span> ở cuối dòng để xem thẻ kho, hoặc bấm <span class="btn-badge btn-warning">D/L XLS by BUYER / MA#</span> để xuất Excel.
+          </p>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Giao diện trang Inventory control › Inventory sau khi đã Nhập kho &amp; Xuất kho (Bộ lọc NOT ZERO)</span>
+              <span>Ví dụ thực tế 5 mã vật tư của Contract-001: Đã nhập (IN = 5000, 5000, 1000, 800, 200), Còn chờ về (IN BALANCE = 2200, 2200, 200, 200, 0) và Cột OUT (4200, 4200, 600, 500, 100)</span>
+            </div>
+            <img src="pages/15_inventory_show_all.png" alt="Inventory">
+          </div>
+
+          <div class="chat-msg-chips" style="margin-top: 0.5rem;">
+            <span class="chat-chip" onclick="askQuestion('Ý nghĩa CONT., N/A, ASSIGNED trong Inventory')">💬 Hỏi Chatbot: Phân biệt tồn kho CONT., N/A và ASSIGNED</span>
+            <span class="chat-chip" onclick="askQuestion('Tiêu đề cột màn hình Inventory')">💬 Hỏi Chatbot: Giải nghĩa các cột trang Inventory</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11 & 12. SHIPMENT & STOCK -->
+      <section class="module-section" id="sec-shipment" data-role="merchandiser warehouse admin">
+        <div class="module-header">
+          <div class="module-title-wrap">
+            <span class="module-tag">BƯỚC 7: GIAO HÀNG &amp; XEM TỒN THÀNH PHẨM</span>
+            <h2 class="module-title">11 &amp; 12. Trang Đóng Gói, Giao Hàng (Shipment) &amp; Xem Tồn Kho Thành Phẩm (Stock)</h2>
+          </div>
+          <div class="breadcrumb-trail"><span class="breadcrumb-label">📁 Menu:</span> CONTRACT STATUS ▶ Shipment &amp; Stock</div>
+        </div>
+        <div class="submodule-card">
+          <div class="submodule-title">11. Trang Đóng Gói &amp; Giao Hàng Thành Phẩm (Buyer Order › Shipment)</div>
+          <p class="submodule-desc" style="margin-bottom:0.5rem;">
+            <b>📁 Đường dẫn Menu:</b> <code>CONTRACT STATUS ▶ Shipment</code> (<code>/mrp/buyer-order/shipment</code>)
+          </p>
+          <div class="submodule-title" style="font-size:1rem;">📝 Trang này dùng để nhập cái gì?</div>
+          <p class="submodule-desc">
+            Chỉ dùng cho nghiệp vụ <b>đóng gói và giao hàng thành phẩm</b> của từng Hợp đồng: nhập <b>Số lượng đã đóng gói</b> (<code>② PACKED</code>), nhập <b>Số lượng kiểm kê thực tế</b> (<code>④ PHYSICAL</code>) và nhập <b>Số lượng xuất giao cho khách theo từng ngày</b> (<code>③ SHIPPED</code>).
+          </p>
+
+          <div class="scenario-box">
+            <span class="scenario-title">✅ CÁC BƯỚC THAO TÁC GIAO HÀNG TRÊN TRANG SHIPMENT:</span>
+            <ul class="steps-list">
+              <li class="step-item">
+                <span class="step-num">BƯỚC 1:</span>
+                <div class="step-text">
+                  Chọn khách hàng tại ô <code>BUYER</code> (VD: <code>Buyer-001</code>) và chọn hợp đồng tại ô <code>CONTRACT #</code> (VD: <code>Contract-001</code>), sau đó <b>bấm nút xanh lá <span class="btn-badge btn-success">APPLY</span></b> để tải danh sách mã hàng lên bảng.
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 2:</span>
+                <div class="step-text">
+                  <b>Nhập số lượng Đóng gói (<code>② PACKED</code>):</b> Nhấp vào số có biểu tượng cây bút <code>✎</code> ở cột <code>② PACKED</code> (VD trên ảnh: <code>Stl001 - Black-001</code> nhập <code>✎ 500</code>, <code>White-001</code> nhập <code>✎ 600</code>, <code>Stl002 - Black-001</code> nhập <code>✎ 400</code>).
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 3:</span>
+                <div class="step-text">
+                  <b>Nhập số lượng Kiểm kê (<code>④ PHYSICAL</code>):</b> Nhấp vào biểu tượng cây bút <code>✎</code> ở cột <code>④ PHYSICAL</code> để nhập số lượng kiểm kê thực tế tại kho thành phẩm (VD: <code>✎ 300</code>, <code>✎ 100</code>, <code>✎ 50</code>).
+                </div>
+              </li>
+              <li class="step-item">
+                <span class="step-num">BƯỚC 4:</span>
+                <div class="step-text">
+                  <b>Nhập lịch và số lượng Xuất giao khách (<code>③ SHIPPED</code>):</b> Bấm nút xanh dương <span class="btn-badge btn-primary">ADD</span> ở góc phải tiêu đề <code>QUANTITY</code> để thêm cột ngày xuất (VD: <code>2026/11/13</code>) ➔ Nhấp vào ô dưới ngày xuất để gõ số lượng giao (VD: <code>200</code>, <code>400</code>, <code>150</code>) ➔ Tick chọn ô vuông cạnh chữ <code>SET</code> và bấm nút xanh lá <span class="btn-badge btn-success">SET</span> để lưu.<br>
+                  👉 <b>Ví dụ kết quả tự tính trên dòng 1 (<code>Stl001 - Black-001</code>):</b> Đặt <code>1,000</code> | Đóng gói <code>500</code> | Đã giao <code>200</code> | Kiểm kê <code>300</code> ➔ Còn nợ chưa giao <b><code>NOT SHIP QTY = 800</code></b> và Tồn thành phẩm <b><code>STOCK = 600</code></b>.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Giao diện trang Buyer Order › Shipment (Ví dụ Contract-001)</span>
+              <span>Hiển thị đầy đủ số liệu PACKED, SHIPPED, NOT SHIP QTY, STOCK, PHYSICAL và cột ngày xuất hàng</span>
+            </div>
+            <img src="pages/04_buyer_order_shipment.png" alt="Buyer Order Shipment Contract-001">
+          </div>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Giao diện trang Buyer Order › Shipment (Ví dụ Contract-002)</span>
+              <span>Stl002 White-001 (Packed 800, Shipped 500, Stock 400) &amp; Black-001 (Packed 700, Shipped 300, Stock 500)</span>
+            </div>
+            <img src="pages/04b_buyer_order_shipment_contract002.png" alt="Buyer Order Shipment Contract-002">
+          </div>
+
+          <div class="chat-msg-chips" style="margin-top: 0.5rem;">
+            <span class="chat-chip" onclick="askQuestion('Công thức tính Shipment và Stock')">💬 Hỏi Chatbot: Công thức tính Not Ship Qty &amp; Stock</span>
+            <span class="chat-chip" onclick="askQuestion('Tiêu đề cột màn hình Shipment và Stock')">💬 Hỏi Chatbot: Giải nghĩa các cột trang Shipment</span>
+          </div>
+        </div>
+        <div class="submodule-card" id="sec-stock">
+          <div class="submodule-title">12. Trang Xem Tồn Kho Thành Phẩm (Buyer Order › Stock)</div>
+          <p class="submodule-desc" style="margin-bottom:0.5rem;">
+            <b>📁 Đường dẫn Menu:</b> <code>CONTRACT STATUS ▶ Stock</code> (<code>/mrp/buyer-order/stock</code>)
+          </p>
+          <p class="submodule-desc">
+            <b>📌 Mục đích:</b> Đây là <b>trang chỉ xem và xuất báo cáo</b> tồn kho thành phẩm tổng hợp của mọi hợp đồng (dữ liệu tự động lấy từ trang <code>Shipment</code>, không nhập liệu trực tiếp tại đây).<br>
+            <b>✅ Thao tác nhanh:</b> Chọn ngày cần xem (hoặc để mặc định <code>TODAY</code>) ➔ bấm nút xanh lá <span class="btn-badge btn-success">APPLY</span> để xem bảng tồn kho ➔ bấm <span class="btn-badge btn-warning">D/L LIST</span> để tải file Excel nếu cần.
+          </p>
+
+          <div class="screen-preview">
+            <div class="screen-preview-caption">
+              <span>🖥️ Giao diện trang Buyer Order › Stock (Báo cáo Tồn kho Thành phẩm)</span>
+              <span>Tổng hợp tự động số liệu của cả Contract-001 và Contract-002</span>
+            </div>
+            <img src="pages/05_buyer_order_stock.png" alt="Buyer Order Stock">
+          </div>
+        </div>
+      </section>
+
+      <!-- 13. ADMIN -->
+      <section class="module-section" id="sec-admin" data-role="admin">
+        <div class="module-header">
+          <div class="module-title-wrap">
+            <span class="module-tag">QUẢN TRỊ HỆ THỐNG</span>
+            <h2 class="module-title">13. Trang Quản Trị Tài Khoản &amp; Hồ Sơ Cá Nhân (Admin)</h2>
+          </div>
+          <div class="breadcrumb-trail"><span class="breadcrumb-label">📁 Menu:</span> ADMIN ▶ Account / Profile / Logout</div>
+        </div>
+        <div class="submodule-card">
+          <div class="submodule-title">13. Trang Quản Trị Tài Khoản &amp; Hồ Sơ Cá Nhân (Phân Hệ ADMIN)</div>
+          <p class="submodule-desc" style="margin-bottom:0.5rem;">
+            <b>📁 Đường dẫn Menu:</b> <code>ADMIN ▶ Account</code> (<code>/mrp/admin/account</code>) &amp; <code>ADMIN ▶ Profile</code> (<code>/mrp/admin/account/edit</code>)
+          </p>
+          <div class="submodule-title" style="font-size:1rem;">📝 Trang này dùng để nhập cái gì &amp; thao tác như thế nào?</div>
+          <p class="submodule-desc">
+            • <b>Trang <code>Admin › Account</code>:</b> Dùng cho Quản trị viên <b>tạo tài khoản đăng nhập mới</b> cho nhân viên (bấm nút <span class="btn-badge btn-success">+ Add</span> ➔ nhập ID, Tên, Email, Mật khẩu, Phân quyền ➔ bấm Lưu) hoặc khóa/mở khóa tài khoản hiện có.<br>
+            • <b>Trang <code>Admin › Profile</code>:</b> Dùng cho người đang đăng nhập <b>tự cập nhật thông tin cá nhân và đổi mật khẩu</b> (nhập mật khẩu mới rồi bấm Lưu).<br>
+            • <b>Nút <code>Admin › Logout</code>:</b> Bấm để đăng xuất an toàn khỏi hệ thống.
+          </p>
+        </div>
+      </section>
+
+      <!-- SECTION 13: QUICK FAQ & CHATBOT PROMPT -->
+      <section class="module-section" id="sec-faq" data-role="common">
+        <div class="module-header">
+          <div class="module-title-wrap">
+            <span class="module-tag">LƯU Ý QUAN TRỌNG &amp; TRỢ LÝ CHATBOT</span>
+            <h2 class="module-title">14. Các Tình Huống Thường Gặp &amp; Tra Cứu Kiến Thức Qua Chatbot</h2>
+          </div>
+        </div>
+
+        <div class="submodule-card">
+          <p class="submodule-desc">
+            Để giao diện hướng dẫn luôn gọn gàng, tập trung vào <b>nhập cái gì</b> và <b>các bước thao tác hoàn thành mục tiêu</b>, toàn bộ kiến thức chuyên sâu (như <i>Giải nghĩa tiêu đề cột của 19 trang, Ý nghĩa các trạng thái &amp; màu sắc cảnh báo, Giải mã lỗi Excel EFM/ECD/ECT/WPO, Từ điển thuật ngữ MRP...</i>) đã được tích hợp sẵn vào <b>Chatbot AI 💬</b>. Bạn có thể bấm trực tiếp vào các câu hỏi bên dưới để Chatbot giải đáp ngay:
+          </p>
+          <div class="chat-msg-chips" style="margin-bottom: 1.25rem;">
+            <span class="chat-chip" onclick="askQuestion('Nhấn GENERATE NEW BOM không thấy khách hàng hoặc style')">⚠️ Không thấy Buyer / Style khi tạo BOM?</span>
+            <span class="chat-chip" onclick="askQuestion('Tổng hợp các lỗi sai thao tác thường gặp')">🛠️ Các lỗi sai thao tác thường gặp</span>
+            <span class="chat-chip" onclick="askQuestion('Thông tin và ý nghĩa sử dụng 19 trang')">🗺️ Thông tin 19 trang hệ thống</span>
+            <span class="chat-chip" onclick="askQuestion('Cách đọc trạng thái và ý nghĩa màu chữ')">🚦 Cách đọc trạng thái &amp; Màu sắc</span>
+            <span class="chat-chip" onclick="askQuestion('Tiêu đề cột màn hình Purchase Order')">📊 Giải nghĩa cột Purchase Order</span>
+            <span class="chat-chip" onclick="askQuestion('Giải mã lỗi EFM, ECD, ECT và WPO, WDF, WCD')">🔍 Giải mã lỗi Excel (EFM, ECD, ECT)</span>
+          </div>
+
+          <div class="faq-item active">
+            <div class="faq-q">
+              <span>❓ Tình huống 1 (Quan trọng nhất): Vì sao đã bấm `MAKE PO` tạo đơn mua nhưng khi vào `Income status` tải file Excel nhập kho lại báo lỗi không nhận diện được PO?</span>
+              <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-a">
+              <b>Nguyên nhân:</b> Khi vừa bấm <code>MAKE PO</code> tại trang <code>Purchase Order</code>, đơn mua mới tạo đang ở trạng thái chờ <b><code>STANDBY</code></b>.<br>
+              <b>Cách xử lý:</b> Tại trang <code>Purchase Order</code>, cuộn ngang bảng sang phải tới cột <code>STATUS</code>, nhấp vào chữ <code>STANDBY</code> (hoặc nút xanh lá <span class="btn-badge btn-success">INFO</span>) và đổi trạng thái sang <b><code>ORDERED</code></b>. Ngay lập tức hàng chờ về sẽ hiện ở cột <code>IN BALANCE</code> trong Kho và bạn tải file Excel tại <code>Income status</code> sẽ thành công 100%!
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">
+              <span>❓ Tình huống 2: Khi nhấn `+ Create new BOM` (mở cửa sổ `GENERATE NEW BOM`) trong `Bom › List` mà không thấy tên Khách hàng (`BUYER`) hoặc tên Mã hàng (`STYLE CODE`) thì làm thế nào?</span>
+              <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-a">
+              <b>Nguyên nhân:</b> Danh sách lựa chọn trong cửa sổ <code>GENERATE NEW BOM</code> chỉ lấy từ các mã chuẩn đã được khai báo trước trong phân hệ <code>CONFIG</code>.<br>
+              <b>Cách xử lý:</b><br>
+              • <b>Nếu chưa thấy tên Mã hàng (<code>STYLE CODE</code> / <code>STYLE NAME</code>):</b> Vào menu <b><code>CONFIG ▶ Code</code></b> (<code>/mrp/config/code</code>), nhìn sang bảng thứ 6 ở góc dưới bên phải là <b><code>Style code</code></b> ➔ bấm nút xanh lá <span class="btn-badge btn-success">+ ADD</span> (hoặc tải Excel bằng nút <code>⬆ UP</code>) để tạo thêm mã Style và tên Style mới.<br>
+              • <b>Nếu chưa thấy tên Khách hàng (<code>BUYER</code>):</b> Vào menu <b><code>CONFIG ▶ Buyer</code></b> (<code>/mrp/config/buyer</code>) ➔ bấm nút xanh lá <span class="btn-badge btn-success">+ Add</span> để thêm tên Khách hàng mới.<br>
+              Sau khi tạo xong, quay lại trang <code>Bom › List</code> bấm <code>+ Create new BOM</code> là sẽ thấy ngay!
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">
+              <span>❓ Tình huống 3: Vì sao Hợp đồng mới tạo ở `Contract Status › Active` lại không hiện ra trong ô chọn `CONT #` tại trang `Purchase Order`?</span>
+              <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-a">
+              <b>Nguyên nhân:</b> Mã <code>Style code</code> trong Hợp đồng đó chưa có bảng định mức BOM khớp <code>Buyer</code> và <code>Color</code> (nút BOM trong cửa sổ <code>MANAGE ORDER</code> báo đỏ <code>Not match</code>).<br>
+              <b>Cách xử lý:</b> Vào <code>BOM DATA ▶ List</code>, tạo mới hoặc bấm <code>COPY</code> từ một BOM mẫu sang đúng cặp <code>Buyer + Style code + Color</code> của hợp đồng. Khi nút BOM chuyển sang màu xanh lá (<code>Match</code>), hợp đồng sẽ xuất hiện ngay tại <code>Purchase Order</code>.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">
+              <span>❓ Tình huống 4: Làm sao để gộp nhiều nguyên phụ liệu của cùng 1 Nhà cung cấp vào chung 1 mã đơn mua `MATERIAL PO #`?</span>
+              <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-a">
+              • <b>Khi tạo PO mới:</b> Tick chọn tất cả các ô vuông ở cột <code>SUPPLIER</code> của các vật tư cùng Nhà cung cấp rồi bấm nút xanh lá <b>MAKE PO</b> một lần.<br>
+              • <b>Khi đã có sẵn PO:</b> Bấm nút màu xanh lá <b>ADD</b> (ở cột <code>ADD / DEL</code> đầu dòng) ➔ chọn mã <code>PO-R-...</code> có sẵn ➔ bấm <b>APPLY</b> ➔ nhấp vào ô <code>ORDER QTY</code> của dòng vừa thêm để nhập số lượng.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- FULL-SCREEN IMAGE LIGHTBOX MODAL -->
+  <div class="lightbox-overlay" id="imageLightbox" role="dialog" aria-modal="true" aria-label="Xem ảnh phóng to toàn màn hình">
+    <div class="lightbox-toolbar">
+      <div class="lightbox-title" id="lightboxTitle">Hình ảnh giao diện</div>
+      <div class="lightbox-controls">
+        <button type="button" class="lightbox-btn" id="btnZoomOut" title="Thu nhỏ (-)">🔍- Thu nhỏ</button>
+        <span class="lightbox-zoom-level" id="lightboxZoomLevel">100%</span>
+        <button type="button" class="lightbox-btn" id="btnZoomIn" title="Phóng to (+)">🔍+ Phóng to</button>
+        <button type="button" class="lightbox-btn" id="btnZoomReset" title="Mặc định vừa màn hình">↔ Vừa màn hình</button>
+        <button type="button" class="lightbox-btn close-btn" id="btnLightboxClose" title="Đóng (ESC)">✕ Đóng (ESC)</button>
+      </div>
+    </div>
+    <div class="lightbox-viewport" id="lightboxViewport">
+      <img src="" alt="Phóng to giao diện" class="lightbox-img" id="lightboxImg">
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Hệ Thống Cẩm Nang Điện Tử Hướng Dẫn Sử Dụng ERP / MRP - SINGLE 2 V 25.02</p>
+    <p style="margin-top: 0.35rem; color: #475569;">Tài liệu hướng dẫn vận hành dành cho người dùng. Bảo mật 100% chống thu thập dữ liệu tự động.</p>
+  </footer>
+
+  <!-- FLOATING BACK TO TOP BUTTON -->
+  <button class="btn-back-to-top" id="btnBackToTop" aria-label="Lên đầu trang" title="Lên đầu trang">
+    ⬆ <span>Lên đầu trang</span>
+  </button>
+
+  <!-- FLOATING CHATBOT WIDGET -->
+  <button class="chatbot-btn" id="chatOpenBtn" aria-label="Mở Trợ Lý Ảo MRP">
+    <div class="chat-pulse"></div>
+    💬
+  </button>
+
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-status-dot"></div>
+        <div>
+          <div class="chat-header-title">Trợ Lý Ảo Hướng Dẫn MRP (SINGLE 2 V25.02)</div>
+          <div class="chat-header-sub">Tra cứu cách sử dụng, ý nghĩa cột, trạng thái, mã lỗi &amp; Gửi hỗ trợ</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center;">
+        <div class="chat-lang-pills" id="chatLangPills" title="Chatbot Language">
+          <button type="button" class="chat-lang-btn active" data-lang="auto">Auto</button>
+          <button type="button" class="chat-lang-btn" data-lang="vi">VI</button>
+          <button type="button" class="chat-lang-btn" data-lang="en">EN</button>
+          <button type="button" class="chat-lang-btn" data-lang="ko">KO</button>
+        </div>
+        <button class="chat-close-btn" id="chatCloseBtn">✕</button>
+      </div>
+    </div>
+
+    <!-- TABS NAVIGATION -->
+    <div class="chat-tabs">
+      <button class="chat-tab-btn active" id="tabBtnChat" onclick="switchMrpTab('chat')">
+        💬 Hỏi đáp tức thì
+      </button>
+      <button class="chat-tab-btn" id="tabBtnSheet" onclick="switchMrpTab('sheet')">
+        📝 Gửi yêu cầu lên Google Sheet
+      </button>
+    </div>
+
+    <!-- TAB 1: INTERACTIVE CHATBOT -->
+    <div class="chat-tab-content active" id="tabContentChat">
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-msg chat-msg-bot">
+          Chào bạn! Tôi là Trợ lý ảo hướng dẫn sử dụng hệ thống <b>SINGLE 2 V 25.02 (ERP / MRP)</b>. Bạn có thể hỏi tôi bất kỳ nội dung nào cần tìm hiểu sâu thêm:
+          <ul style="margin: 0.5rem 0 0 1.2rem; font-size: 0.85rem;">
+            <li><b>Thông tin &amp; Ý nghĩa sử dụng</b> của toàn bộ 19 trang chức năng</li>
+            <li><b>Cách đọc &amp; Ý nghĩa trạng thái</b> (<code>STANDBY</code>, <code>ORDERED</code>, <code>Match</code>, <code>Locked</code>, <code>CONT./N/A</code>, chữ đỏ cảnh báo...)</li>
+            <li><b>Giải nghĩa chi tiết Tiêu đề cột</b> của từng màn hình (<code>Purchase Order</code>, <code>Contract</code>, <code>BOM</code>, <code>Inventory</code>...)</li>
+            <li><b>Quy trình vận hành chuẩn</b> &amp; Giải mã lỗi Excel (<code>EFM</code>, <code>ECD</code>, <code>ECT</code>, <code>WPO</code>)</li>
+          </ul>
+          <div class="chat-msg-chips">
+            <span class="chat-chip" onclick="askQuestion('Thông tin và ý nghĩa sử dụng 19 trang')">🗺️ Thông tin 19 trang</span>
+            <span class="chat-chip" onclick="askQuestion('Cách đọc trạng thái và ý nghĩa màu chữ')">🚦 Cách đọc trạng thái</span>
+            <span class="chat-chip" onclick="askQuestion('Tiêu đề cột màn hình Purchase Order')">📊 Tiêu đề cột Purchase Order</span>
+            <span class="chat-chip" onclick="askQuestion('Chuyển trạng thái STANDBY sang ORDERED')">⚠️ STANDBY ➔ ORDERED</span>
+            <span class="chat-chip" onclick="askQuestion('Tiêu đề cột màn hình Inventory')">📦 Tiêu đề cột Inventory</span>
+            <span class="chat-chip" onclick="askQuestion('Quy trình vận hành từ đầu đến cuối')">🔄 Quy trình vận hành</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Nhập câu hỏi... (VD: tiêu đề cột, trạng thái STANDBY, MAKE PO, lỗi ECD, Shipment...)">
+        <button class="chat-send-btn" id="chatSendBtn">Gửi</button>
+      </div>
+    </div>
+
+    <!-- TAB 2: GOOGLE SHEET FEEDBACK -->
+    <div class="chat-tab-content" id="tabContentSheet">
+      <div class="sheet-form-container">
+        <div class="sheet-notice">
+          ℹ️ <strong>Kênh hỗ trợ kỹ thuật MRP:</strong> Mọi phản hồi, yêu cầu tính năng hoặc sự cố phát sinh sẽ được truyền thẳng về <strong>Google Sheet dùng chung của Quản trị viên &amp; AI Agent</strong>.
+        </div>
+
+        <div id="mrpSheetStatusMsg" class="sheet-status-alert"></div>
+
+        <div class="form-group-item">
+          <label>Nội dung yêu cầu / Thắc mắc / Báo lỗi MRP: <span style="color:#ef4444;">*</span></label>
+          <textarea id="mrpSheetRequest" rows="4" placeholder="Mô tả cụ thể màn hình, mã hợp đồng/vật tư hoặc lỗi bạn đang gặp phải..."></textarea>
+        </div>
+
+        <div class="form-group-item">
+          <label>Tên Zalo / Số điện thoại liên hệ: <span style="font-weight: normal; color: var(--text-muted); font-size: 0.85rem;">(tùy chọn)</span></label>
+          <input type="text" id="mrpSheetZalo" placeholder="Ví dụ: 0987654321">
+        </div>
+
+        <div class="form-group-item">
+          <label>Bộ phận / Công ty: <span style="font-weight: normal; color: var(--text-muted); font-size: 0.85rem;">(tùy chọn)</span></label>
+          <input type="text" id="mrpSheetCompany" placeholder="Ví dụ: Phòng Kinh doanh / Mua hàng MRP">
+        </div>
+
+        <button type="button" class="btn-submit-sheet" id="mrpSheetSubmitBtn" onclick="submitMrpFeedback()">
+          🚀 Gửi phản hồi lên Google Sheet
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT LOGIC -->
+  <script src="chatbot-kb.js"></script>
+  <script>
+    window.PAGE_LANG = document.documentElement.lang || 'vi';
+    window.CHAT_LANG_MODE = 'auto';
+    document.querySelectorAll('#chatLangPills .chat-lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#chatLangPills .chat-lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        window.CHAT_LANG_MODE = btn.dataset.lang || 'auto';
+      });
+    });
+
+    // 0. THEME SWITCHER
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeText = document.getElementById('themeText');
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      try { localStorage.setItem('mrp_manual_theme', theme); } catch (e) {}
+      if (theme === 'dark') {
+        if (themeIcon) themeIcon.textContent = '☀️';
+        if (themeText) themeText.textContent = 'Giao diện Sáng';
+      } else {
+        if (themeIcon) themeIcon.textContent = '🌙';
+        if (themeText) themeText.textContent = 'Giao diện Tối';
+      }
+    }
+
+    const activeTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    applyTheme(activeTheme);
+
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+      });
+    }
+
+    // 1. REAL-TIME CLOCK
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      const el = document.getElementById('sysClock');
+      if (el) el.textContent = `${h} : ${m} : ${s}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // 2. ROLE FILTERING
+    const rolePills = document.querySelectorAll('.role-pill');
+    const sections = document.querySelectorAll('.module-section, .pipeline-card');
+    const sidebarItems = document.querySelectorAll('#sidebarNav li[data-role]');
+    const filterStatusBox = document.getElementById('sidebarFilterStatus');
+    const filterBadgeText = document.getElementById('filterBadgeText');
+    const btnResetFilter = document.getElementById('btnResetFilter');
+    const sidebarResetBtn = document.getElementById('sidebarResetRole');
+
+    const ROLE_NAMES = {
+      all: 'Tất cả bộ phận',
+      merchandiser: 'Hợp đồng & F/G',
+      technical: 'Định mức BOM',
+      purchasing: 'Mua hàng MRP',
+      warehouse: 'Kho Vật tư',
+      admin: 'Config & Admin'
+    };
+
+    function applyRoleFilter(role) {
+      rolePills.forEach(p => {
+        if (p.getAttribute('data-role') === role) p.classList.add('active');
+        else p.classList.remove('active');
+      });
+
+      if (filterStatusBox && filterBadgeText) {
+        if (role === 'all') {
+          filterStatusBox.style.display = 'none';
+        } else {
+          filterStatusBox.style.display = 'flex';
+          filterBadgeText.textContent = `Đang lọc: ${ROLE_NAMES[role] || role}`;
+        }
+      }
+
+      sections.forEach(sec => {
+        const roles = sec.getAttribute('data-role') || '';
+        if (role === 'all' || roles.includes(role) || roles.includes('common')) {
+          sec.style.display = 'block';
+        } else {
+          sec.style.display = 'none';
+        }
+      });
+
+      sidebarItems.forEach(li => {
+        const link = li.querySelector('a');
+        if (!link) return;
+        const liRoles = li.getAttribute('data-role') || '';
+        if (role !== 'all' && liRoles.includes(role)) {
+          link.classList.add('role-matched');
+        } else {
+          link.classList.remove('role-matched');
+        }
+      });
+    }
+
+    rolePills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        const role = pill.getAttribute('data-role');
+        applyRoleFilter(role);
+      });
+    });
+
+    if (sidebarResetBtn) sidebarResetBtn.addEventListener('click', () => applyRoleFilter('all'));
+    if (btnResetFilter) btnResetFilter.addEventListener('click', () => applyRoleFilter('all'));
+
+    // 3. GLOBAL SEARCH FILTER
+    const searchInput = document.getElementById('globalSearch');
+    searchInput.addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase().trim();
+      if (!term) {
+        sections.forEach(sec => sec.style.display = 'block');
+        return;
+      }
+      sections.forEach(sec => {
+        const text = sec.innerText.toLowerCase();
+        sec.style.display = text.includes(term) ? 'block' : 'none';
+      });
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        searchInput.focus();
+      }
+    });
+
+    // 4. SCROLLSPY / TOC ACTIVE TRACKER
+    const tocLinks = Array.from(document.querySelectorAll('#sidebarNav a[href^="#"]'));
+    const trackedItems = tocLinks.map(link => {
+      const id = link.getAttribute('href').substring(1);
+      const el = document.getElementById(id);
+      return { link, el };
+    }).filter(item => item.el !== null);
+
+    function updateActiveTOC() {
+      const visibleTracked = trackedItems.filter(item => item.el && item.el.offsetParent !== null);
+      if (visibleTracked.length === 0) return;
+
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      const triggerLine = 140; // px from top of viewport (below sticky navbar)
+      let activeItem = visibleTracked[0];
+
+      if (scrollY < 80) {
+        activeItem = visibleTracked[0];
+      } else if ((window.innerHeight + scrollY) >= document.documentElement.scrollHeight - 40) {
+        activeItem = visibleTracked[visibleTracked.length - 1];
+      } else {
+        // Pick the last (deepest/most-specific) visible section or submodule whose top has crossed triggerLine
+        for (let i = 0; i < visibleTracked.length; i++) {
+          const rect = visibleTracked[i].el.getBoundingClientRect();
+          if (rect.top <= triggerLine) {
+            activeItem = visibleTracked[i];
+          }
+        }
+      }
+
+      if (activeItem) {
+        tocLinks.forEach(l => l.classList.remove('active'));
+        activeItem.link.classList.add('active');
+      }
+    }
+
+    let scrollScheduled = false;
+    window.addEventListener('scroll', () => {
+      if (!scrollScheduled) {
+        window.requestAnimationFrame(() => {
+          updateActiveTOC();
+          scrollScheduled = false;
+        });
+        scrollScheduled = true;
+      }
+    }, { passive: true });
+
+    tocLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const id = link.getAttribute('href').substring(1);
+        const target = document.getElementById(id);
+        if (target) {
+          e.preventDefault();
+          tocLinks.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    const btnBackToTop = document.getElementById('btnBackToTop');
+    if (btnBackToTop) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) btnBackToTop.classList.add('visible');
+        else btnBackToTop.classList.remove('visible');
+      }, { passive: true });
+      btnBackToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
+
+    // 5. ACCORDION FAQ
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => {
+        q.parentElement.classList.toggle('active');
+      });
+    });
+
+    // 6. SMART CLIENT-SIDE CHATBOT ENGINE FOR SINGLE 2 V25.02 - MRP-DEMO
+    const chatBtn = document.getElementById('chatOpenBtn');
+    const chatWin = document.getElementById('chatWindow');
+    const chatClose = document.getElementById('chatCloseBtn');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const chatSend = document.getElementById('chatSendBtn');
+
+    chatBtn.addEventListener('click', () => chatWin.classList.toggle('open'));
+    chatClose.addEventListener('click', () => chatWin.classList.remove('open'));
+
+    const STOP_WORDS = new Set([
+      'là', 'của', 'và', 'cho', 'với', 'ở', 'tại', 'trong', 'như', 'thế', 'nào',
+      'làm', 'sao', 'được', 'gì', 'thì', 'bị', 'do', 'khi', 'sau', 'trước', 'các',
+      'những', 'cái', 'chiếc', 'một', 'này', 'đó', 'ơi', 'hỏi', 'mình', 'tôi', 'bạn',
+      'hãy', 'vui', 'lòng', 'vào', 'để', 'có', 'không', 'ai', 'ạ', 'nhe', 'nha'
+    ]);
+
+    let activeChatContext = 'general';
+
+    const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwZy_F3H1rOyASlRcQ232udKlspUlb-3mGLKhCGPlBSz7tfdxPYf0H0WvnHDcbhfY5N/exec";
+
+    window.switchMrpTab = function(tabName) {
+      const btnChat = document.getElementById('tabBtnChat');
+      const btnSheet = document.getElementById('tabBtnSheet');
+      const contentChat = document.getElementById('tabContentChat');
+      const contentSheet = document.getElementById('tabContentSheet');
+
+      if (tabName === 'sheet') {
+        btnChat.classList.remove('active');
+        btnSheet.classList.add('active');
+        contentChat.classList.remove('active');
+        contentSheet.classList.add('active');
+      } else {
+        btnSheet.classList.remove('active');
+        btnChat.classList.add('active');
+        contentSheet.classList.remove('active');
+        contentChat.classList.add('active');
+      }
+    };
+
+    window.submitMrpFeedback = function() {
+      const reqInput = document.getElementById('mrpSheetRequest');
+      const zaloInput = document.getElementById('mrpSheetZalo');
+      const compInput = document.getElementById('mrpSheetCompany');
+      const statusMsg = document.getElementById('mrpSheetStatusMsg');
+      const submitBtn = document.getElementById('mrpSheetSubmitBtn');
+
+      const requestVal = reqInput ? reqInput.value.trim() : '';
+      const zaloVal = zaloInput ? zaloInput.value.trim() : '';
+      const companyVal = compInput ? compInput.value.trim() : '';
+
+      if (!requestVal) {
+        if (statusMsg) {
+          statusMsg.className = 'sheet-status-alert error';
+          statusMsg.style.display = 'block';
+          statusMsg.innerHTML = '⚠️ Vui lòng nhập nội dung thắc mắc hoặc sự cố MRP của bạn!';
+        }
+        if (reqInput) reqInput.focus();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '⏳ Đang truyền dữ liệu đến Google Sheet...';
+      if (statusMsg) statusMsg.style.display = 'none';
+
+      switchMrpTab('chat');
+      const pendingBubble = document.createElement('div');
+      pendingBubble.className = 'chat-msg chat-msg-bot';
+      pendingBubble.innerHTML = `⏳ <em>Đang gửi yêu cầu hỗ trợ MRP đến Google Sheet của Quản trị viên...</em>`;
+      chatMessages.appendChild(pendingBubble);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      const formData = new FormData();
+      formData.append('system', 'MRP-SINGLE2');
+      formData.append('request', requestVal);
+      formData.append('zalo', zaloVal || 'Ẩn danh');
+      formData.append('company', companyVal || 'MRP Demo User');
+      formData.append('timestamp', new Date().toLocaleString('vi-VN'));
+      formData.append('url', window.location.href);
+
+      if (GOOGLE_SHEET_WEBAPP_URL && GOOGLE_SHEET_WEBAPP_URL.startsWith('http')) {
+        fetch(GOOGLE_SHEET_WEBAPP_URL, { method: 'POST', mode: 'no-cors', body: formData })
+          .then(() => finishMrpSubmission(pendingBubble, zaloVal))
+          .catch(() => finishMrpSubmission(pendingBubble, zaloVal));
+      } else {
+        finishMrpSubmission(pendingBubble, zaloVal);
+      }
+    };
+
+    function finishMrpSubmission(bubbleElem, zaloVal) {
+      const submitBtn = document.getElementById('mrpSheetSubmitBtn');
+      const reqInput = document.getElementById('mrpSheetRequest');
+      const zaloInput = document.getElementById('mrpSheetZalo');
+      const compInput = document.getElementById('mrpSheetCompany');
+      const statusMsg = document.getElementById('mrpSheetStatusMsg');
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '🚀 Gửi phản hồi lên Google Sheet';
+      }
+      if (reqInput) reqInput.value = '';
+      if (zaloInput) zaloInput.value = '';
+      if (compInput) compInput.value = '';
+
+      bubbleElem.style.borderColor = '#10b981';
+      bubbleElem.innerHTML = `🎉 <b>ĐÃ GỬI YÊU CẦU MRP THÀNH CÔNG!</b><br><br>Yêu cầu đã được lưu vào <b>Google Sheet Quản trị viên</b>.<br><em>Chúng tôi sẽ phản hồi sớm qua Zalo (${zaloVal || 'Ẩn danh'}).</em>`;
+
+      if (statusMsg) {
+        statusMsg.className = 'sheet-status-alert success';
+        statusMsg.style.display = 'block';
+        statusMsg.innerHTML = '🎉 Đã gửi thành công!';
+      }
+    }
+
+    function appendMessage(text, isUser, chips = []) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `chat-msg ${isUser ? 'chat-msg-user' : 'chat-msg-bot'}`;
+      msgDiv.innerHTML = text;
+
+      if (chips && chips.length > 0 && !isUser) {
+        const chipsContainer = document.createElement('div');
+        chipsContainer.className = 'chat-msg-chips';
+        chips.forEach(c => {
+          const chipSpan = document.createElement('span');
+          chipSpan.className = 'chat-chip';
+          chipSpan.textContent = c;
+          chipSpan.onclick = () => askQuestion(c);
+          chipsContainer.appendChild(chipSpan);
+        });
+        msgDiv.appendChild(chipsContainer);
+      }
+
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function askQuestion(q) {
+      if (!chatWin.classList.contains('open')) chatWin.classList.add('open');
+      appendMessage(q, true);
+      processQuery(q);
+    }
+
+    function processQuery(rawQuery) {
+      const query = rawQuery.toLowerCase().trim();
+      const tokens = query.split(/[\s,?.!;:()\[\]"]+/).filter(t => t.length > 1 && !STOP_WORDS.has(t));
+
+      setTimeout(() => {
+        const kbList = window.MRP_KB || [];
+        let best = null;
+        let maxScore = 0;
+
+        kbList.forEach(item => {
+          let score = 0;
+          const loc = item[window.PAGE_LANG || 'vi'] || item.vi;
+          const allKw = item.keywords || [];
+          allKw.forEach(kw => {
+            const kwLow = kw.toLowerCase();
+            if (query === kwLow) score += 60;
+            else if (query.includes(kwLow)) {
+              const wc = kwLow.split(' ').length;
+              score += (wc >= 2) ? (70 + wc * 25) : 35;
+            }
+          });
+          tokens.forEach(tok => {
+            let matched = false;
+            const titles = [item.vi.title, item.en.title, item.ko.title].join(' ').toLowerCase();
+            if (titles.includes(tok)) { score += 15; matched = true; }
+            if (!matched) {
+              for (let k = 0; k < allKw.length; k++) {
+                if (allKw[k].toLowerCase().includes(tok)) { score += 10; break; }
+              }
+            }
+          });
+          if (score > maxScore) { maxScore = score; best = item; }
+        });
+
+        const replyLang = (window.CHAT_LANG_MODE && window.CHAT_LANG_MODE !== 'auto')
+          ? window.CHAT_LANG_MODE
+          : (window.detectChatLang ? window.detectChatLang(rawQuery, window.PAGE_LANG || 'vi') : (window.PAGE_LANG || 'vi'));
+
+        if (best && maxScore >= 15) {
+          activeChatContext = best.id;
+          const tr = best[replyLang] || best.vi;
+          appendMessage(tr.answer, false, tr.chips);
+        } else {
+          const fb = (window.CHAT_FALLBACK && window.CHAT_FALLBACK[replyLang]) || {
+            msg: (q) => `Xin lỗi, tôi chưa tìm thấy câu trả lời chính xác cho "<b>${q}</b>".`,
+            chips: []
+          };
+          appendMessage(fb.msg(rawQuery), false, fb.chips);
+        }
+      }, 280);
+    }
+
+    chatSend.addEventListener('click', () => {
+      const q = chatInput.value.trim();
+      if (!q) return;
+      chatInput.value = '';
+      askQuestion(q);
+    });
+
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const q = chatInput.value.trim();
+        if (!q) return;
+        chatInput.value = '';
+        askQuestion(q);
+      }
+    });
+
+    // 7. FULL-SCREEN IMAGE LIGHTBOX & ZOOM ENGINE
+    (function() {
+      const lightbox = document.getElementById('imageLightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxTitle = document.getElementById('lightboxTitle');
+      const lightboxZoomLevel = document.getElementById('lightboxZoomLevel');
+      const lightboxViewport = document.getElementById('lightboxViewport');
+      const btnZoomIn = document.getElementById('btnZoomIn');
+      const btnZoomOut = document.getElementById('btnZoomOut');
+      const btnZoomReset = document.getElementById('btnZoomReset');
+      const btnLightboxClose = document.getElementById('btnLightboxClose');
+
+      let currentScale = 1;
+      const MIN_SCALE = 0.5;
+      const MAX_SCALE = 3.5;
+      const STEP_SCALE = 0.25;
+
+      function updateZoomUI() {
+        if (!lightboxImg || !lightboxZoomLevel) return;
+        lightboxZoomLevel.textContent = `${Math.round(currentScale * 100)}%`;
+        if (currentScale === 1) {
+          lightboxImg.style.maxWidth = '96vw';
+          lightboxImg.style.maxHeight = '86vh';
+          lightboxImg.style.width = 'auto';
+          lightboxImg.style.transform = 'scale(1)';
+        } else {
+          lightboxImg.style.maxWidth = 'none';
+          lightboxImg.style.maxHeight = 'none';
+          lightboxImg.style.width = `${Math.round(currentScale * 100)}vw`;
+          lightboxImg.style.transform = 'none';
+        }
+      }
+
+      function openLightbox(src, titleText) {
+        if (!lightbox || !lightboxImg) return;
+        lightboxImg.src = src;
+        if (lightboxTitle) lightboxTitle.textContent = titleText || 'Xem ảnh phóng to toàn màn hình';
+        currentScale = 1;
+        updateZoomUI();
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        if (!lightbox) return;
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      // Attach zoom button and click listener to every .screen-preview
+      document.querySelectorAll('.screen-preview').forEach(box => {
+        const img = box.querySelector('img');
+        const cap = box.querySelector('.screen-preview-caption');
+        if (!img) return;
+        const titleText = cap ? cap.innerText.split('\n')[0].trim() : (img.alt || 'Hình ảnh giao diện');
+
+        if (cap) {
+          const zoomBtn = document.createElement('button');
+          zoomBtn.type = 'button';
+          zoomBtn.className = 'btn-zoom-hint';
+          zoomBtn.innerHTML = '🔍 Phóng to toàn màn hình';
+          zoomBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openLightbox(img.getAttribute('src'), titleText);
+          });
+          cap.appendChild(zoomBtn);
+        }
+
+        img.setAttribute('title', 'Nhấp vào ảnh để phóng to toàn màn hình');
+        img.addEventListener('click', () => {
+          openLightbox(img.getAttribute('src'), titleText);
+        });
+      });
+
+      if (btnZoomIn) {
+        btnZoomIn.addEventListener('click', () => {
+          currentScale = Math.min(MAX_SCALE, +(currentScale + STEP_SCALE).toFixed(2));
+          updateZoomUI();
+        });
+      }
+      if (btnZoomOut) {
+        btnZoomOut.addEventListener('click', () => {
+          currentScale = Math.max(MIN_SCALE, +(currentScale - STEP_SCALE).toFixed(2));
+          updateZoomUI();
+        });
+      }
+      if (btnZoomReset) {
+        btnZoomReset.addEventListener('click', () => {
+          currentScale = 1;
+          updateZoomUI();
+        });
+      }
+      if (btnLightboxClose) {
+        btnLightboxClose.addEventListener('click', closeLightbox);
+      }
+
+      // Close when clicking dark background outside image
+      if (lightboxViewport) {
+        lightboxViewport.addEventListener('click', (e) => {
+          if (e.target === lightboxViewport) closeLightbox();
+        });
+
+        // Mouse wheel zoom
+        lightboxViewport.addEventListener('wheel', (e) => {
+          e.preventDefault();
+          if (e.deltaY < 0) {
+            currentScale = Math.min(MAX_SCALE, +(currentScale + 0.15).toFixed(2));
+          } else {
+            currentScale = Math.max(MIN_SCALE, +(currentScale - 0.15).toFixed(2));
+          }
+          updateZoomUI();
+        }, { passive: false });
+
+        // Drag to pan when zoomed in
+        let isDragging = false;
+        let startX = 0, startY = 0, scrollLeft = 0, scrollTop = 0;
+        lightboxViewport.addEventListener('mousedown', (e) => {
+          if (e.button !== 0) return;
+          isDragging = true;
+          lightboxViewport.classList.add('dragging');
+          startX = e.pageX - lightboxViewport.offsetLeft;
+          startY = e.pageY - lightboxViewport.offsetTop;
+          scrollLeft = lightboxViewport.scrollLeft;
+          scrollTop = lightboxViewport.scrollTop;
+        });
+        window.addEventListener('mouseup', () => {
+          isDragging = false;
+          if (lightboxViewport) lightboxViewport.classList.remove('dragging');
+        });
+        lightboxViewport.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          e.preventDefault();
+          const x = e.pageX - lightboxViewport.offsetLeft;
+          const y = e.pageY - lightboxViewport.offsetTop;
+          lightboxViewport.scrollLeft = scrollLeft - (x - startX);
+          lightboxViewport.scrollTop = scrollTop - (y - startY);
+        });
+      }
+
+      window.addEventListener('keydown', (e) => {
+        if (!lightbox || !lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        else if (e.key === '+' || e.key === '=') {
+          currentScale = Math.min(MAX_SCALE, +(currentScale + STEP_SCALE).toFixed(2));
+          updateZoomUI();
+        } else if (e.key === '-') {
+          currentScale = Math.max(MIN_SCALE, +(currentScale - STEP_SCALE).toFixed(2));
+          updateZoomUI();
+        } else if (e.key === '0') {
+          currentScale = 1;
+          updateZoomUI();
+        }
+      });
+    })();
+  </script>
+  <script src="step-annotations.js"></script>
+</body>
+</html>
